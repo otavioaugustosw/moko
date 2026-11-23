@@ -1,0 +1,21 @@
+{
+  "publisher": "Otavio Augusto",
+  "supportEmail": "contato@otavioaugustosw.com",
+  "legalReview": {
+    "approved": false,
+    "reviewer": "",
+    "reference": "",
+    "jurisdictions": [],
+    "candidateSHA256": ""
+  },
+  "websitePrivacyReview": {
+    "approved": false,
+    "reference": ""
+  },
+  "cleanMacValidation": {
+    "passed": false,
+    "reference": "",
+    "candidateSHA256": ""
+  },
+  "sourcesURL": "https://github.com/otavioaugustosw/moko/releases/download/runtime-sources-2026-10-12/moko-base-runtime-sources.zip"
+}

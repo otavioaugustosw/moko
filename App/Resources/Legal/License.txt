@@ -1,0 +1,27 @@
+moko license
+version: 22 november 2026
+copyright (c) 2026 otavio augusto
+contact: contato@otavioaugustosw.com
+source code: https://github.com/otavioaugustosw/moko
+
+1. license
+moko is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+moko is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+The complete license text is in the "gpl-3.0" tab and in Contents/Resources/Legal/GPL-3.0.txt.
+
+2. third-party software
+PostgreSQL, MariaDB, PHP and their libraries are independent programs and libraries under their own licenses, listed in the "third party" tab. Those licenses govern the covered components. Nothing in this document limits the rights they grant.
+
+3. name, mascot and portrait
+The GNU General Public License does not grant permission to use the name "moko", its mascot or its icon to identify or endorse a modified version. A modified version must carry prominent notices stating that it was changed. The author's portrait shown in the support screen is a personal image: it is included only to credit the original project and is not licensed for other uses. Remove it from modified versions.
+
+4. your projects and data
+You keep the rights you have in your projects, databases and content. You control the code and SQL that you run, including SQL run by an AI agent that you connect to moko. Keep independent backups before upgrades and before modifying or deleting data. moko is a local-development tool and is not intended as public production hosting.
+
+5. optional support
+Buy Me a Coffee support is optional. It does not purchase a license, a feature, a guaranteed support response or access to source code, which is public. Payment processing is provided by Buy Me a Coffee under its own terms.
+
+6. rights that cannot be excluded
+The warranty disclaimer and limitation of liability in sections 15 and 16 of the GNU General Public License apply to the maximum extent permitted by applicable law. They do not exclude liability or consumer rights that applicable law does not allow to be excluded.

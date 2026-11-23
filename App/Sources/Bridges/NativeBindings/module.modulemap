@@ -1,0 +1,4 @@
+module DatabaseNative {
+    header "DatabaseNative.h"
+    export *
+}

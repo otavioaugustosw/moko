@@ -1,0 +1,2 @@
+// Optional, ignored local signing configuration. No private keys live in the project.
+#include? "../../Local/Signing/Signing.xcconfig"

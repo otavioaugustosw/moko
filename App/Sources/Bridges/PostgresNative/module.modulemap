@@ -1,0 +1,5 @@
+module PostgresNative [system] {
+    header "PostgresNative.h"
+    link "pq"
+    export *
+}

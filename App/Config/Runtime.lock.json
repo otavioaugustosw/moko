@@ -1,0 +1,1295 @@
+{
+  "mariadb@11.8": {
+    "name": "mariadb@11.8",
+    "version": "11.8.9",
+    "license": "GPL-2.0-only",
+    "bottle": {
+      "cellar": "/opt/homebrew/Cellar",
+      "url": "https://ghcr.io/v2/homebrew/core/mariadb/11.8/blobs/sha256:2a49278226d6874408af5601c4f2467d8430f99e18aa1b92fab0ee2ceb0f1e84",
+      "sha256": "2a49278226d6874408af5601c4f2467d8430f99e18aa1b92fab0ee2ceb0f1e84"
+    },
+    "source": {
+      "url": "https://archive.mariadb.org/mariadb-11.8.9/source/mariadb-11.8.9.tar.gz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "2e015b7e91004142eda8b3a20d3ceb875cf2ae55e72603e7222cd497d4e56fc6"
+    },
+    "dependencies": [
+      "groonga",
+      "lz4",
+      "lzo",
+      "openssl@3",
+      "pcre2",
+      "xz",
+      "zstd"
+    ]
+  },
+  "groonga": {
+    "name": "groonga",
+    "version": "16.1.3",
+    "license": "LGPL-2.1-or-later",
+    "bottle": {
+      "cellar": "/opt/homebrew/Cellar",
+      "url": "https://ghcr.io/v2/homebrew/core/groonga/blobs/sha256:99f9bf41dbbc46e6d06061a52649d3410f7bf1558863d9b47a1d096c4f064f1e",
+      "sha256": "99f9bf41dbbc46e6d06061a52649d3410f7bf1558863d9b47a1d096c4f064f1e"
+    },
+    "source": {
+      "url": "https://github.com/groonga/groonga/releases/download/v16.1.3/groonga-16.1.3.tar.gz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "61e1c8f1671e22d7bf4cd8c35002b9674d29ba82ae2cbe6835d73d3a45af202b"
+    },
+    "dependencies": [
+      "lz4",
+      "mecab",
+      "mecab-ipadic",
+      "msgpack",
+      "onigmo",
+      "simdjson",
+      "zstd"
+    ]
+  },
+  "lz4": {
+    "name": "lz4",
+    "version": "1.10.0",
+    "license": "BSD-2-Clause",
+    "bottle": {
+      "cellar": ":any",
+      "url": "https://ghcr.io/v2/homebrew/core/lz4/blobs/sha256:2be9df952396d89008e56232b065354b3bd51dde5f8a30c1fe18d765ff26e017",
+      "sha256": "2be9df952396d89008e56232b065354b3bd51dde5f8a30c1fe18d765ff26e017"
+    },
+    "source": {
+      "url": "https://github.com/lz4/lz4/archive/refs/tags/v1.10.0.tar.gz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "537512904744b35e232912055ccf8ec66d768639ff3abe5788d90d792ec5f48b"
+    },
+    "dependencies": []
+  },
+  "mecab": {
+    "name": "mecab",
+    "version": "0.996",
+    "license": "GPL-2.0-only OR LGPL-2.1-only OR BSD-3-Clause",
+    "bottle": {
+      "cellar": "/opt/homebrew/Cellar",
+      "url": "https://ghcr.io/v2/homebrew/core/mecab/blobs/sha256:72298458bdf93c9012a74c60fb039ad00d77ad89839274c9857743bee97e22f0",
+      "sha256": "72298458bdf93c9012a74c60fb039ad00d77ad89839274c9857743bee97e22f0"
+    },
+    "source": {
+      "url": "https://deb.debian.org/debian/pool/main/m/mecab/mecab_0.996.orig.tar.gz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "e073325783135b72e666145c781bb48fada583d5224fb2490fb6c1403ba69c59"
+    },
+    "dependencies": []
+  },
+  "mecab-ipadic": {
+    "name": "mecab-ipadic",
+    "version": "2.7.0-20070801",
+    "license": "NAIST-2003",
+    "bottle": {
+      "cellar": ":any_skip_relocation",
+      "url": "https://ghcr.io/v2/homebrew/core/mecab-ipadic/blobs/sha256:3bdeed6d823a573bbac30e4994b79e26ae025379d2cb9b2193128b0cda7aca85",
+      "sha256": "3bdeed6d823a573bbac30e4994b79e26ae025379d2cb9b2193128b0cda7aca85"
+    },
+    "source": {
+      "url": "https://deb.debian.org/debian/pool/main/m/mecab-ipadic/mecab-ipadic_2.7.0-20070801+main.orig.tar.gz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "b62f527d881c504576baed9c6ef6561554658b175ce6ae0096a60307e49e3523"
+    },
+    "dependencies": [
+      "mecab"
+    ]
+  },
+  "msgpack": {
+    "name": "msgpack",
+    "version": "7.0.2",
+    "license": "BSL-1.0",
+    "bottle": {
+      "cellar": ":any",
+      "url": "https://ghcr.io/v2/homebrew/core/msgpack/blobs/sha256:0256ac35fddc2e310727c2ebe9303775de6bfa54e71dde35a2c99f3c5e03f651",
+      "sha256": "0256ac35fddc2e310727c2ebe9303775de6bfa54e71dde35a2c99f3c5e03f651"
+    },
+    "source": {
+      "url": "https://github.com/msgpack/msgpack-c/releases/download/c-7.0.2/msgpack-c-7.0.2.tar.gz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "6ae50f69612871aa01de76bec904165cd2a2fc30ff9f653f2f60a663c5c1a86c"
+    },
+    "dependencies": []
+  },
+  "onigmo": {
+    "name": "onigmo",
+    "version": "6.2.0",
+    "license": "BSD-2-Clause",
+    "bottle": {
+      "cellar": ":any",
+      "url": "https://ghcr.io/v2/homebrew/core/onigmo/blobs/sha256:6da2a45f04ccd10f3d53a55f8ee740f6e34de3028cfb90034521b8d7d75062c0",
+      "sha256": "6da2a45f04ccd10f3d53a55f8ee740f6e34de3028cfb90034521b8d7d75062c0"
+    },
+    "source": {
+      "url": "https://github.com/k-takata/Onigmo/releases/download/Onigmo-6.2.0/onigmo-6.2.0.tar.gz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "c648496b5339953b925ebf44b8de356feda8d3428fa07dc1db95bfe2570feb76"
+    },
+    "dependencies": []
+  },
+  "simdjson": {
+    "name": "simdjson",
+    "version": "5.0.3",
+    "license": "Apache-2.0",
+    "bottle": {
+      "cellar": ":any",
+      "url": "https://ghcr.io/v2/homebrew/core/simdjson/blobs/sha256:2090cde68e91c5fc5726c5e313fb6480e61acebd3ed0ab56b749d496fa80b765",
+      "sha256": "2090cde68e91c5fc5726c5e313fb6480e61acebd3ed0ab56b749d496fa80b765"
+    },
+    "source": {
+      "url": "https://github.com/simdjson/simdjson/archive/refs/tags/v5.0.3.tar.gz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "295e96d96d6d55face58e99b47ddc1f6c7c1a302f2ce5edf2c1ba7518972f0ed"
+    },
+    "dependencies": []
+  },
+  "zstd": {
+    "name": "zstd",
+    "version": "1.5.7",
+    "license": "(BSD-3-Clause OR GPL-2.0-only) AND BSD-2-Clause AND MIT",
+    "bottle": {
+      "cellar": ":any",
+      "url": "https://ghcr.io/v2/homebrew/core/zstd/blobs/sha256:628a4ef53428d0078e3d76d297171ce8d0294f5ec1de3f20305e08c4dd333565",
+      "sha256": "628a4ef53428d0078e3d76d297171ce8d0294f5ec1de3f20305e08c4dd333565"
+    },
+    "source": {
+      "url": "https://github.com/facebook/zstd/archive/refs/tags/v1.5.7.tar.gz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "37d7284556b20954e56e1ca85b80226768902e2edabd3b649e9e72c0c9012ee3"
+    },
+    "dependencies": [
+      "lz4",
+      "xz"
+    ]
+  },
+  "xz": {
+    "name": "xz",
+    "version": "5.8.4",
+    "license": "0BSD AND GPL-2.0-or-later",
+    "bottle": {
+      "cellar": ":any",
+      "url": "https://ghcr.io/v2/homebrew/core/xz/blobs/sha256:d291ad2277682238329b0e4d249e5e2c948c4b10cd64dba1963d897330ad88dd",
+      "sha256": "d291ad2277682238329b0e4d249e5e2c948c4b10cd64dba1963d897330ad88dd"
+    },
+    "source": {
+      "url": "https://github.com/tukaani-project/xz/releases/download/v5.8.4/xz-5.8.4.tar.gz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "0014c7886930454fe8bd4228665b51af55eeae560ea135c9c4cd33f55b2591d9"
+    },
+    "dependencies": []
+  },
+  "lzo": {
+    "name": "lzo",
+    "version": "2.10",
+    "license": "GPL-2.0-or-later",
+    "bottle": {
+      "cellar": ":any",
+      "url": "https://ghcr.io/v2/homebrew/core/lzo/blobs/sha256:9863be33af38858d028657bdfbceaff00465b23a9857ce6ed93e2ad24f6adbd8",
+      "sha256": "9863be33af38858d028657bdfbceaff00465b23a9857ce6ed93e2ad24f6adbd8"
+    },
+    "source": {
+      "url": "https://www.oberhumer.com/opensource/lzo/download/lzo-2.10.tar.gz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "c0f892943208266f9b6543b3ae308fab6284c5c90e627931446fb49b4221a072"
+    },
+    "dependencies": []
+  },
+  "openssl@3": {
+    "name": "openssl@3",
+    "version": "3.6.5",
+    "license": "Apache-2.0",
+    "bottle": {
+      "cellar": "/opt/homebrew/Cellar",
+      "url": "https://ghcr.io/v2/homebrew/core/openssl/3/blobs/sha256:a1ef3283ad41feaedac5d41dafc4c2a71db6492c3a45a4d1755cfb19d02afc7b",
+      "sha256": "a1ef3283ad41feaedac5d41dafc4c2a71db6492c3a45a4d1755cfb19d02afc7b"
+    },
+    "source": {
+      "url": "https://github.com/openssl/openssl/releases/download/openssl-3.6.5/openssl-3.6.5.tar.gz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "a2157c2830efdec3788939b00c9b0638306d3f0bbb76dc4832ee503bb397df98"
+    },
+    "dependencies": [
+      "ca-certificates"
+    ]
+  },
+  "ca-certificates": {
+    "name": "ca-certificates",
+    "version": "2026-09-25",
+    "license": "MPL-2.0",
+    "bottle": {
+      "cellar": ":any_skip_relocation",
+      "url": "https://ghcr.io/v2/homebrew/core/ca-certificates/blobs/sha256:81804ad8a70a7a8d2a0a964d106765ff88716b310decaeffb4b4895a3252186a",
+      "sha256": "81804ad8a70a7a8d2a0a964d106765ff88716b310decaeffb4b4895a3252186a"
+    },
+    "source": {
+      "url": "https://curl.se/ca/cacert-2026-09-25.pem",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "a41b5d356aea97a529fe27e0f7316d2f9d946d75927476cf9cf1b90637d00505"
+    },
+    "dependencies": []
+  },
+  "pcre2": {
+    "name": "pcre2",
+    "version": "10.49",
+    "license": "BSD-3-Clause",
+    "bottle": {
+      "cellar": ":any",
+      "url": "https://ghcr.io/v2/homebrew/core/pcre2/blobs/sha256:475d36ffae1f472554eac1fd96ca3ead3840c3d8fd2d34b257d2d7c4c1e5a17f",
+      "sha256": "475d36ffae1f472554eac1fd96ca3ead3840c3d8fd2d34b257d2d7c4c1e5a17f"
+    },
+    "source": {
+      "url": "https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.49/pcre2-10.49.tar.bz2",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "53c156e1ba416a20da8e65395daa132da0d80e76910424caca3fcdae7831d384"
+    },
+    "dependencies": []
+  },
+  "mariadb-connector-c": {
+    "name": "mariadb-connector-c",
+    "version": "3.4.11",
+    "license": "LGPL-2.1-or-later",
+    "bottle": {
+      "cellar": "/opt/homebrew/Cellar",
+      "url": "https://ghcr.io/v2/homebrew/core/mariadb-connector-c/blobs/sha256:87595e0874db22f73ce3851878ef6a1b1c245329483ab62bfea941192effefaf",
+      "sha256": "87595e0874db22f73ce3851878ef6a1b1c245329483ab62bfea941192effefaf"
+    },
+    "source": {
+      "url": "https://archive.mariadb.org/connector-c-3.4.11/mariadb-connector-c-3.4.11-src.tar.gz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "521c0712e9291fa96558df9e2ff431376a3a79329f13751896b694cae12765b4"
+    },
+    "dependencies": [
+      "openssl@4",
+      "zstd"
+    ]
+  },
+  "openssl@4": {
+    "name": "openssl@4",
+    "version": "4.0.3",
+    "license": "Apache-2.0",
+    "bottle": {
+      "cellar": "/opt/homebrew/Cellar",
+      "url": "https://ghcr.io/v2/homebrew/core/openssl/4/blobs/sha256:39fb74d25429fbb9794cf4327530ba458b97d0000406715270d3b0715bd6ba35",
+      "sha256": "39fb74d25429fbb9794cf4327530ba458b97d0000406715270d3b0715bd6ba35"
+    },
+    "source": {
+      "url": "https://github.com/openssl/openssl/releases/download/openssl-4.0.3/openssl-4.0.3.tar.gz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "325b5c806167c13b40b1ffeadfe0248197c00eccc4cf123ec1e28d2d2fd216d9"
+    },
+    "dependencies": [
+      "ca-certificates"
+    ]
+  },
+  "php@8.4": {
+    "name": "php@8.4",
+    "version": "8.4.26",
+    "license": "PHP-3.01 AND Zend-2.0 AND BSL-1.0 AND MIT AND Apache-1.0 AND Apache-2.0 AND bcrypt-Solar-Designer AND BSD-2-Clause-Darwin AND BSD-2-Clause AND BSD-3-Clause AND BSD-4-Clause-UC AND ISC AND LGPL-2.1-only AND LGPL-2.1-or-later AND OLDAP-2.8 AND TCL AND Zlib",
+    "bottle": {
+      "cellar": "/opt/homebrew/Cellar",
+      "url": "https://ghcr.io/v2/homebrew/core/php/8.4/blobs/sha256:e6e07d3573f3be869d3e9b5b2d7ba3a00fc2128a9cdd0687b6a5120d9907af3c",
+      "sha256": "e6e07d3573f3be869d3e9b5b2d7ba3a00fc2128a9cdd0687b6a5120d9907af3c"
+    },
+    "source": {
+      "url": "https://www.php.net/distributions/php-8.4.26.tar.xz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "32a2de53862ad44ed4a5005244ce4f1b50c271e74dced215449a4443b40569f1"
+    },
+    "dependencies": [
+      "apr",
+      "apr-util",
+      "argon2",
+      "autoconf",
+      "curl",
+      "freetds",
+      "gd",
+      "gmp",
+      "icu4c@78",
+      "libpq",
+      "libsodium",
+      "libzip",
+      "net-snmp",
+      "oniguruma",
+      "openldap",
+      "openssl@4",
+      "pcre2",
+      "sqlite",
+      "tidy-html5",
+      "unixodbc",
+      "gettext"
+    ]
+  },
+  "apr": {
+    "name": "apr",
+    "version": "1.7.6",
+    "license": "Apache-2.0",
+    "bottle": {
+      "cellar": ":any",
+      "url": "https://ghcr.io/v2/homebrew/core/apr/blobs/sha256:a8dbcf3f996ba1148b936081612ff5228cb4ba5a08de6635a695bd9ec6963266",
+      "sha256": "a8dbcf3f996ba1148b936081612ff5228cb4ba5a08de6635a695bd9ec6963266"
+    },
+    "source": {
+      "url": "https://www.apache.org/dyn/closer.lua?path=apr/apr-1.7.6.tar.bz2",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "49030d92d2575da735791b496dc322f3ce5cff9494779ba8cc28c7f46c5deb32"
+    },
+    "dependencies": []
+  },
+  "apr-util": {
+    "name": "apr-util",
+    "version": "1.6.5",
+    "license": "Apache-2.0",
+    "bottle": {
+      "cellar": "/opt/homebrew/Cellar",
+      "url": "https://ghcr.io/v2/homebrew/core/apr-util/blobs/sha256:22e6ad6d2811495d5c5467e56c64e710b093e36f2141e4490b0e65d4ffaa59fe",
+      "sha256": "22e6ad6d2811495d5c5467e56c64e710b093e36f2141e4490b0e65d4ffaa59fe"
+    },
+    "source": {
+      "url": "https://www.apache.org/dyn/closer.lua?path=apr/apr-util-1.6.5.tar.bz2",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "96de1dd6f6a0476d2d2e7964926d8c1ddc3bb0e210e1b1812d3ba5a454a392e2"
+    },
+    "dependencies": [
+      "apr",
+      "openssl@4"
+    ]
+  },
+  "argon2": {
+    "name": "argon2",
+    "version": "20190702",
+    "license": "CC0-1.0 OR Apache-2.0",
+    "bottle": {
+      "cellar": ":any",
+      "url": "https://ghcr.io/v2/homebrew/core/argon2/blobs/sha256:afaa0b7c4c305b6b8ccef5abb4863d30fc1dfc537cc2bdc43e1c558df25723c6",
+      "sha256": "afaa0b7c4c305b6b8ccef5abb4863d30fc1dfc537cc2bdc43e1c558df25723c6"
+    },
+    "source": {
+      "url": "https://github.com/P-H-C/phc-winner-argon2/archive/refs/tags/20190702.tar.gz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "daf972a89577f8772602bf2eb38b6a3dd3d922bf5724d45e7f9589b5e830442c"
+    },
+    "dependencies": []
+  },
+  "autoconf": {
+    "name": "autoconf",
+    "version": "2.73",
+    "license": "GPL-3.0-or-later AND (GPL-3.0-or-later WITH Autoconf-exception-3.0)",
+    "bottle": {
+      "cellar": ":any_skip_relocation",
+      "url": "https://ghcr.io/v2/homebrew/core/autoconf/blobs/sha256:bc785e044f4bec3efa3e9875f154905dad8a249e6e57d2a3ab0250eebdc866e8",
+      "sha256": "bc785e044f4bec3efa3e9875f154905dad8a249e6e57d2a3ab0250eebdc866e8"
+    },
+    "source": {
+      "url": "https://ftpmirror.gnu.org/autoconf/autoconf-2.73.tar.gz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "259ddfa3bddc799cfb81489cc0f17dfdf1bd6d1505dda53c0f45ff60d6a4f9a7"
+    },
+    "dependencies": [
+      "m4"
+    ]
+  },
+  "m4": {
+    "name": "m4",
+    "version": "1.4.21",
+    "license": "GPL-3.0-or-later",
+    "bottle": {
+      "cellar": ":any_skip_relocation",
+      "url": "https://ghcr.io/v2/homebrew/core/m4/blobs/sha256:81e05b29593d5a7a5dc4fe5f245fc62623a84b82c67183bf26385cb86939c6d4",
+      "sha256": "81e05b29593d5a7a5dc4fe5f245fc62623a84b82c67183bf26385cb86939c6d4"
+    },
+    "source": {
+      "url": "https://ftpmirror.gnu.org/m4/m4-1.4.21.tar.xz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "f25c6ab51548a73a75558742fb031e0625d6485fe5f9155949d6486a2408ab66"
+    },
+    "dependencies": []
+  },
+  "curl": {
+    "name": "curl",
+    "version": "8.22.0",
+    "license": "curl",
+    "bottle": {
+      "cellar": ":any",
+      "url": "https://ghcr.io/v2/homebrew/core/curl/blobs/sha256:1535802dbee99fd2141dad6f55b8395993306a2f394079fe32e68d401bc6e466",
+      "sha256": "1535802dbee99fd2141dad6f55b8395993306a2f394079fe32e68d401bc6e466"
+    },
+    "source": {
+      "url": "https://curl.se/download/curl-8.22.0.tar.bz2",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "5d956a6a22b3c279f50c421ee5d3c9e9d660cb6f115dcf881b579e952130549c"
+    },
+    "dependencies": [
+      "brotli",
+      "libnghttp2",
+      "libnghttp3",
+      "libngtcp2",
+      "libpsl",
+      "libssh2",
+      "openssl@4",
+      "zstd"
+    ]
+  },
+  "brotli": {
+    "name": "brotli",
+    "version": "1.2.0",
+    "license": "MIT",
+    "bottle": {
+      "cellar": ":any",
+      "url": "https://ghcr.io/v2/homebrew/core/brotli/blobs/sha256:71ffd30ccd74a9f28cfb210c21fcdc1aa5fec79e23ad2264b6dbceb73437601f",
+      "sha256": "71ffd30ccd74a9f28cfb210c21fcdc1aa5fec79e23ad2264b6dbceb73437601f"
+    },
+    "source": {
+      "url": "https://github.com/google/brotli/archive/refs/tags/v1.2.0.tar.gz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "816c96e8e8f193b40151dad7e8ff37b1221d019dbcb9c35cd3fadbfe6477dfec"
+    },
+    "dependencies": []
+  },
+  "libnghttp2": {
+    "name": "libnghttp2",
+    "version": "1.70.0",
+    "license": "MIT",
+    "bottle": {
+      "cellar": ":any",
+      "url": "https://ghcr.io/v2/homebrew/core/libnghttp2/blobs/sha256:4f04e4a69e2c30443054c6214bf632df69a0d7c17d7fe58578f061a9cbc7f265",
+      "sha256": "4f04e4a69e2c30443054c6214bf632df69a0d7c17d7fe58578f061a9cbc7f265"
+    },
+    "source": {
+      "url": "https://github.com/nghttp2/nghttp2/releases/download/v1.70.0/nghttp2-1.70.0.tar.gz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "aa317e2cf9dca6afa0aed68f8fad6ff303ec6982e25a78c75c0b65e2b9b3ded5"
+    },
+    "dependencies": []
+  },
+  "libnghttp3": {
+    "name": "libnghttp3",
+    "version": "1.18.0",
+    "license": "MIT",
+    "bottle": {
+      "cellar": ":any",
+      "url": "https://ghcr.io/v2/homebrew/core/libnghttp3/blobs/sha256:f06612abad603898100dfc4fdcff8464789a2b57593ec70255ed633d664020e7",
+      "sha256": "f06612abad603898100dfc4fdcff8464789a2b57593ec70255ed633d664020e7"
+    },
+    "source": {
+      "url": "https://github.com/ngtcp2/nghttp3/releases/download/v1.18.0/nghttp3-1.18.0.tar.xz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "aad782c23d3f01bd4bb52c8bac7a553b631ef8115fd1612703df6183449fef19"
+    },
+    "dependencies": []
+  },
+  "libngtcp2": {
+    "name": "libngtcp2",
+    "version": "1.25.0",
+    "license": "MIT",
+    "bottle": {
+      "cellar": ":any",
+      "url": "https://ghcr.io/v2/homebrew/core/libngtcp2/blobs/sha256:6f3de07772fcd0b2c34b03276526de3c9ede59dbde95f6a5fafd7c5f9c584173",
+      "sha256": "6f3de07772fcd0b2c34b03276526de3c9ede59dbde95f6a5fafd7c5f9c584173"
+    },
+    "source": {
+      "url": "https://github.com/ngtcp2/ngtcp2/releases/download/v1.25.0/ngtcp2-1.25.0.tar.xz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "2a34d2484ba17847a5d11965704e9dd0fac4c6d8efc75ffe1ec7de66d8c6b6fb"
+    },
+    "dependencies": [
+      "openssl@4"
+    ]
+  },
+  "libpsl": {
+    "name": "libpsl",
+    "version": "0.23.3",
+    "license": "MIT",
+    "bottle": {
+      "cellar": ":any",
+      "url": "https://ghcr.io/v2/homebrew/core/libpsl/blobs/sha256:3058120ea617a1ba193463788e81b8afd08fcf0abdbaf0bb5bfa85eebc695761",
+      "sha256": "3058120ea617a1ba193463788e81b8afd08fcf0abdbaf0bb5bfa85eebc695761"
+    },
+    "source": {
+      "url": "https://github.com/rockdaboot/libpsl/releases/download/0.23.3/libpsl-0.23.3.tar.gz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "93941f85a1e7bd593fa94f299233cb5dfc91cd144fd9a78a6ceb75001c5b03be"
+    },
+    "dependencies": []
+  },
+  "libssh2": {
+    "name": "libssh2",
+    "version": "1.11.1",
+    "license": "BSD-3-Clause",
+    "bottle": {
+      "cellar": ":any",
+      "url": "https://ghcr.io/v2/homebrew/core/libssh2/blobs/sha256:d51f26fef662c9f562f8d6bee348c9e9fdd2a917cc96bb1b26aa53116b9e7481",
+      "sha256": "d51f26fef662c9f562f8d6bee348c9e9fdd2a917cc96bb1b26aa53116b9e7481"
+    },
+    "source": {
+      "url": "https://libssh2.org/download/libssh2-1.11.1.tar.gz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "d9ec76cbe34db98eec3539fe2c899d26b0c837cb3eb466a56b0f109cabf658f7"
+    },
+    "dependencies": [
+      "openssl@4"
+    ]
+  },
+  "freetds": {
+    "name": "freetds",
+    "version": "1.5.19",
+    "license": "GPL-2.0-or-later",
+    "bottle": {
+      "cellar": "/opt/homebrew/Cellar",
+      "url": "https://ghcr.io/v2/homebrew/core/freetds/blobs/sha256:dcb36b94451805b1fb5f114766ae22ad7088748d42510df31688becbe5378214",
+      "sha256": "dcb36b94451805b1fb5f114766ae22ad7088748d42510df31688becbe5378214"
+    },
+    "source": {
+      "url": "https://www.freetds.org/files/stable/freetds-1.5.19.tar.bz2",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "0dc2df2fea9934e3a99e00d417f3d192e9897572f6aff3905bd48f2507d16dff"
+    },
+    "dependencies": [
+      "openssl@4",
+      "unixodbc"
+    ]
+  },
+  "unixodbc": {
+    "name": "unixodbc",
+    "version": "2.3.14",
+    "license": "LGPL-2.1-or-later AND GPL-2.0-or-later",
+    "bottle": {
+      "cellar": "/opt/homebrew/Cellar",
+      "url": "https://ghcr.io/v2/homebrew/core/unixodbc/blobs/sha256:16b4c2a9d565749bae947c75a100ec4628e57c427af5b542593f67474077b3cb",
+      "sha256": "16b4c2a9d565749bae947c75a100ec4628e57c427af5b542593f67474077b3cb"
+    },
+    "source": {
+      "url": "https://www.unixodbc.org/unixODBC-2.3.14.tar.gz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "4e2814de3e01fc30b0b9f75e83bb5aba91ab0384ee951286504bb70205524771"
+    },
+    "dependencies": [
+      "libtool"
+    ]
+  },
+  "libtool": {
+    "name": "libtool",
+    "version": "2.6.2",
+    "license": "GPL-2.0-or-later",
+    "bottle": {
+      "cellar": ":any",
+      "url": "https://ghcr.io/v2/homebrew/core/libtool/blobs/sha256:719ae9c4597d0198ee77da6bb09dfcb6f68ae0302330f1a1e61503648e59fdd2",
+      "sha256": "719ae9c4597d0198ee77da6bb09dfcb6f68ae0302330f1a1e61503648e59fdd2"
+    },
+    "source": {
+      "url": "https://ftpmirror.gnu.org/libtool/libtool-2.6.2.tar.xz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "2ef1067c16c97db930fd740cc9bc3d3ba9a583804ae5ac42cc3e8719e49e191e"
+    },
+    "dependencies": [
+      "m4"
+    ]
+  },
+  "gd": {
+    "name": "gd",
+    "version": "2.3.3",
+    "license": "GD",
+    "bottle": {
+      "cellar": ":any",
+      "url": "https://ghcr.io/v2/homebrew/core/gd/blobs/sha256:db4a448757d199dc1a925c0d0b36a990c8126ab81cf6a634374cd7307d042fb0",
+      "sha256": "db4a448757d199dc1a925c0d0b36a990c8126ab81cf6a634374cd7307d042fb0"
+    },
+    "source": {
+      "url": "https://github.com/libgd/libgd/releases/download/gd-2.3.3/libgd-2.3.3.tar.xz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "3fe822ece20796060af63b7c60acb151e5844204d289da0ce08f8fdf131e5a61"
+    },
+    "dependencies": [
+      "fontconfig",
+      "freetype",
+      "jpeg-turbo",
+      "libavif",
+      "libpng",
+      "libtiff",
+      "webp"
+    ]
+  },
+  "fontconfig": {
+    "name": "fontconfig",
+    "version": "2.18.3",
+    "license": "HPND-sell-variant AND Unicode-3.0 AND MIT-Modern-Variant AND MIT AND LicenseRef-Homebrew-public-domain",
+    "bottle": {
+      "cellar": "/opt/homebrew/Cellar",
+      "url": "https://ghcr.io/v2/homebrew/core/fontconfig/blobs/sha256:ad1c5a3054313853e9eefa9a07c32a3ff7b11c4fbcff9e73affc2a50233dbafe",
+      "sha256": "ad1c5a3054313853e9eefa9a07c32a3ff7b11c4fbcff9e73affc2a50233dbafe"
+    },
+    "source": {
+      "url": "https://gitlab.freedesktop.org/fontconfig/fontconfig/-/archive/2.18.3/fontconfig-2.18.3.tar.gz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "9ae01e1d53acdef56010c5451cd34aa41d325b2faccd8606448d8fa01b2496b3"
+    },
+    "dependencies": [
+      "freetype",
+      "gettext"
+    ]
+  },
+  "freetype": {
+    "name": "freetype",
+    "version": "2.14.3",
+    "license": "FTL",
+    "bottle": {
+      "cellar": ":any",
+      "url": "https://ghcr.io/v2/homebrew/core/freetype/blobs/sha256:12a2e191f4ef6b4fd3c624ac36ed76bb317474893b92b5dac4c5884eb9f1fec3",
+      "sha256": "12a2e191f4ef6b4fd3c624ac36ed76bb317474893b92b5dac4c5884eb9f1fec3"
+    },
+    "source": {
+      "url": "https://downloads.sourceforge.net/project/freetype/freetype2/2.14.3/freetype-2.14.3.tar.xz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "36bc4f1cc413335368ee656c42afca65c5a3987e8768cc28cf11ba775e785a5f"
+    },
+    "dependencies": [
+      "brotli",
+      "libpng"
+    ]
+  },
+  "libpng": {
+    "name": "libpng",
+    "version": "1.6.59",
+    "license": "libpng-2.0",
+    "bottle": {
+      "cellar": ":any",
+      "url": "https://ghcr.io/v2/homebrew/core/libpng/blobs/sha256:de1c24778cb63a442682c1e6a391560662046a68c2f0c207ecb4abbc81e98cff",
+      "sha256": "de1c24778cb63a442682c1e6a391560662046a68c2f0c207ecb4abbc81e98cff"
+    },
+    "source": {
+      "url": "https://downloads.sourceforge.net/project/libpng/libpng16/1.6.59/libpng-1.6.59.tar.xz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "d80dd2a38a37f803cb9b6ac7b14bd6e74ddc3b654780a8380bdf93523fdb4389"
+    },
+    "dependencies": []
+  },
+  "gettext": {
+    "name": "gettext",
+    "version": "1.0",
+    "license": "GPL-3.0-or-later AND LGPL-2.1-or-later",
+    "bottle": {
+      "cellar": "/opt/homebrew/Cellar",
+      "url": "https://ghcr.io/v2/homebrew/core/gettext/blobs/sha256:3af5392939e50a6ef73e42799fc3ead6ef72fe0040c0a45183d04a4008306d6a",
+      "sha256": "3af5392939e50a6ef73e42799fc3ead6ef72fe0040c0a45183d04a4008306d6a"
+    },
+    "source": {
+      "url": "https://ftpmirror.gnu.org/gettext/gettext-1.0.tar.gz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "85d99b79c981a404874c02e0342176cf75c7698e2b51fe41031cf6526d974f1a"
+    },
+    "dependencies": [
+      "json-c",
+      "libunistring"
+    ]
+  },
+  "json-c": {
+    "name": "json-c",
+    "version": "0.19",
+    "license": "MIT",
+    "bottle": {
+      "cellar": ":any",
+      "url": "https://ghcr.io/v2/homebrew/core/json-c/blobs/sha256:f2da9c816501d9c3c0e5f883b60b3d2758b35a3995e20d541d4b029d8b35ef13",
+      "sha256": "f2da9c816501d9c3c0e5f883b60b3d2758b35a3995e20d541d4b029d8b35ef13"
+    },
+    "source": {
+      "url": "https://s3.amazonaws.com/json-c_releases/releases/json-c-0.19.tar.gz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "37ad0249902e301bd9052bf712e511fcc6acff4ecaad4b5900aad9ce564e26de"
+    },
+    "dependencies": []
+  },
+  "libunistring": {
+    "name": "libunistring",
+    "version": "1.4.2",
+    "license": "GPL-2.0-or-later OR LGPL-3.0-or-later",
+    "bottle": {
+      "cellar": ":any",
+      "url": "https://ghcr.io/v2/homebrew/core/libunistring/blobs/sha256:14a72bd0aa3f1b2b3a7360be24380171d140b2fc5abbde0144807d3847b6728c",
+      "sha256": "14a72bd0aa3f1b2b3a7360be24380171d140b2fc5abbde0144807d3847b6728c"
+    },
+    "source": {
+      "url": "https://ftpmirror.gnu.org/libunistring/libunistring-1.4.2.tar.gz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "e82664b170064e62331962126b259d452d53b227bb4a93ab20040d846fec01d8"
+    },
+    "dependencies": []
+  },
+  "jpeg-turbo": {
+    "name": "jpeg-turbo",
+    "version": "3.2.0",
+    "license": "IJG AND Zlib AND BSD-3-Clause",
+    "bottle": {
+      "cellar": ":any",
+      "url": "https://ghcr.io/v2/homebrew/core/jpeg-turbo/blobs/sha256:02539b0736cfacdc6c4bb6a7d274d0c5c8b6e1faf9b5bab1e155168961d288aa",
+      "sha256": "02539b0736cfacdc6c4bb6a7d274d0c5c8b6e1faf9b5bab1e155168961d288aa"
+    },
+    "source": {
+      "url": "https://github.com/libjpeg-turbo/libjpeg-turbo/releases/download/3.2.0/libjpeg-turbo-3.2.0.tar.gz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "6f30092cef9fb839779646608f4ee14ae3cbac989c47fa05e841b0841f09878e"
+    },
+    "dependencies": []
+  },
+  "libavif": {
+    "name": "libavif",
+    "version": "1.4.2",
+    "license": "BSD-2-Clause",
+    "bottle": {
+      "cellar": ":any",
+      "url": "https://ghcr.io/v2/homebrew/core/libavif/blobs/sha256:584d41a9ad0fd601fac27735b928483c3f8494d4e08d6461599f7fabc915783b",
+      "sha256": "584d41a9ad0fd601fac27735b928483c3f8494d4e08d6461599f7fabc915783b"
+    },
+    "source": {
+      "url": "https://github.com/AOMediaCodec/libavif/archive/refs/tags/v1.4.2.tar.gz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "2b645287340ba5a631d268b551dc2d72bd73ac33335962dd36dcdb6d8366921d"
+    },
+    "dependencies": [
+      "aom",
+      "dav1d",
+      "jpeg-turbo",
+      "libpng"
+    ]
+  },
+  "aom": {
+    "name": "aom",
+    "version": "3.15.2",
+    "license": "BSD-2-Clause",
+    "bottle": {
+      "cellar": ":any",
+      "url": "https://ghcr.io/v2/homebrew/core/aom/blobs/sha256:abdf34de13cbb520adaa7ea5cb3cc1f8313d281a0f456c9c39fa415cddef82a0",
+      "sha256": "abdf34de13cbb520adaa7ea5cb3cc1f8313d281a0f456c9c39fa415cddef82a0"
+    },
+    "source": {
+      "url": "https://aomedia.googlesource.com/aom.git",
+      "tag": "v3.15.2",
+      "revision": "af3dc9aadc793c1b00edc003e3fc19a44fdeb574",
+      "using": null,
+      "checksum": null
+    },
+    "dependencies": [
+      "libvmaf"
+    ]
+  },
+  "libvmaf": {
+    "name": "libvmaf",
+    "version": "3.2.1",
+    "license": "BSD-2-Clause-Patent",
+    "bottle": {
+      "cellar": ":any",
+      "url": "https://ghcr.io/v2/homebrew/core/libvmaf/blobs/sha256:703f56cd94ba6bb86ee1463bec792d8ad6f9841f67152fa6e93040b966bbf82f",
+      "sha256": "703f56cd94ba6bb86ee1463bec792d8ad6f9841f67152fa6e93040b966bbf82f"
+    },
+    "source": {
+      "url": "https://github.com/Netflix/vmaf/archive/refs/tags/v3.2.1.tar.gz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "5df7386911bc15fd1ca783132528748d219768ae4fc5f8e0b61184f041648092"
+    },
+    "dependencies": []
+  },
+  "dav1d": {
+    "name": "dav1d",
+    "version": "1.5.4",
+    "license": "BSD-2-Clause",
+    "bottle": {
+      "cellar": ":any",
+      "url": "https://ghcr.io/v2/homebrew/core/dav1d/blobs/sha256:d30ff747564febd643ec4b279c5adc74f708b8d6eb8e172f914b9fcdec26c464",
+      "sha256": "d30ff747564febd643ec4b279c5adc74f708b8d6eb8e172f914b9fcdec26c464"
+    },
+    "source": {
+      "url": "https://code.videolan.org/videolan/dav1d/-/archive/1.5.4/dav1d-1.5.4.tar.bz2",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "2abfb0c89212e6e4733a54e0ae509ec00a5b845a6360946f918806e14aedb011"
+    },
+    "dependencies": []
+  },
+  "libtiff": {
+    "name": "libtiff",
+    "version": "4.7.2",
+    "license": "libtiff",
+    "bottle": {
+      "cellar": ":any",
+      "url": "https://ghcr.io/v2/homebrew/core/libtiff/blobs/sha256:9a0ff1ac153879e9fb324951f33fc52c797149a6de44176e4fb80f0c8adad9a8",
+      "sha256": "9a0ff1ac153879e9fb324951f33fc52c797149a6de44176e4fb80f0c8adad9a8"
+    },
+    "source": {
+      "url": "https://download.osgeo.org/libtiff/tiff-4.7.2.tar.gz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "672bd7d10aee4606171afb864f3570b83340f6a33e2c186dc0512f7145ffdf6a"
+    },
+    "dependencies": [
+      "jpeg-turbo",
+      "webp",
+      "xz",
+      "zstd"
+    ]
+  },
+  "webp": {
+    "name": "webp",
+    "version": "1.6.0",
+    "license": "BSD-3-Clause",
+    "bottle": {
+      "cellar": ":any",
+      "url": "https://ghcr.io/v2/homebrew/core/webp/blobs/sha256:89d7380c156284433cf5a130b82423b1a3d83b4aac88fe88ba35d174bcc9d3b6",
+      "sha256": "89d7380c156284433cf5a130b82423b1a3d83b4aac88fe88ba35d174bcc9d3b6"
+    },
+    "source": {
+      "url": "https://storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-1.6.0.tar.gz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "e4ab7009bf0629fd11982d4c2aa83964cf244cffba7347ecd39019a9e38c4564"
+    },
+    "dependencies": [
+      "giflib",
+      "jpeg-turbo",
+      "libpng"
+    ]
+  },
+  "giflib": {
+    "name": "giflib",
+    "version": "6.1.3",
+    "license": "MIT",
+    "bottle": {
+      "cellar": ":any",
+      "url": "https://ghcr.io/v2/homebrew/core/giflib/blobs/sha256:5bf0850f756c9fe9469d628d1833b0d44db914e44b6b67037e91312c0d0f560d",
+      "sha256": "5bf0850f756c9fe9469d628d1833b0d44db914e44b6b67037e91312c0d0f560d"
+    },
+    "source": {
+      "url": "https://downloads.sourceforge.net/project/giflib/giflib-6.x/giflib-6.1.3.tar.gz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "b65b66b99f0424b93525f987386f22fc5efb9da2bfc92ad4a532249aaffbab0e"
+    },
+    "dependencies": []
+  },
+  "gmp": {
+    "name": "gmp",
+    "version": "6.3.0",
+    "license": "LGPL-3.0-or-later OR GPL-2.0-or-later",
+    "bottle": {
+      "cellar": ":any",
+      "url": "https://ghcr.io/v2/homebrew/core/gmp/blobs/sha256:fa46330de5d003bd9294ae042c8f4ae0a51bcb8c57de2c94c073ff4a7ffa10c3",
+      "sha256": "fa46330de5d003bd9294ae042c8f4ae0a51bcb8c57de2c94c073ff4a7ffa10c3"
+    },
+    "source": {
+      "url": "https://ftpmirror.gnu.org/gmp/gmp-6.3.0.tar.xz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "a3c2b80201b89e68616f4ad30bc66aee4927c3ce50e33929ca819d5c43538898"
+    },
+    "dependencies": []
+  },
+  "icu4c@78": {
+    "name": "icu4c@78",
+    "version": "78.3",
+    "license": "Unicode-3.0",
+    "bottle": {
+      "cellar": ":any",
+      "url": "https://ghcr.io/v2/homebrew/core/icu4c/78/blobs/sha256:0476be299494b97e50a48b0ba08811255300228aef664058e555480d6aee4fb5",
+      "sha256": "0476be299494b97e50a48b0ba08811255300228aef664058e555480d6aee4fb5"
+    },
+    "source": {
+      "url": "https://github.com/unicode-org/icu/releases/download/release-78.3/icu4c-78.3-sources.tgz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "3a2e7a47604ba702f345878308e6fefeca612ee895cf4a5f222e7955fabfe0c0"
+    },
+    "dependencies": []
+  },
+  "libpq": {
+    "name": "libpq",
+    "version": "18.6",
+    "license": "PostgreSQL",
+    "bottle": {
+      "cellar": "/opt/homebrew/Cellar",
+      "url": "https://ghcr.io/v2/homebrew/core/libpq/blobs/sha256:7107ff901d0e9a402d6d210a96942a99bc834d7d7c15ef2e436e6f86d8549b81",
+      "sha256": "7107ff901d0e9a402d6d210a96942a99bc834d7d7c15ef2e436e6f86d8549b81"
+    },
+    "source": {
+      "url": "https://ftp.postgresql.org/pub/source/v18.6/postgresql-18.6.tar.bz2",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "555610c24d53e4316da5b7d3fc25c279d96856d5e0e23ee308c328c5fa881d9f"
+    },
+    "dependencies": [
+      "icu4c@78",
+      "krb5",
+      "openssl@4",
+      "readline"
+    ]
+  },
+  "krb5": {
+    "name": "krb5",
+    "version": "1.22.2",
+    "license": "BSD-2-Clause AND BSD-2-Clause-first-lines AND BSD-3-Clause AND BSD-4-Clause AND Brian-Gladman-2-Clause AND CMU-Mach-nodoc AND FSFULLRWD AND HPND AND HPND-export2-US AND HPND-export-US AND HPND-export-US-acknowledgement AND HPND-export-US-modify AND ISC AND MIT AND MIT-CMU AND OLDAP-2.8 AND OpenVision AND (BSD-2-Clause OR GPL-2.0-or-later)",
+    "bottle": {
+      "cellar": "/opt/homebrew/Cellar",
+      "url": "https://ghcr.io/v2/homebrew/core/krb5/blobs/sha256:8fc14b442b666d56a994cfddb47cd86071b6408905be70f10f7fcf668fc9e1cf",
+      "sha256": "8fc14b442b666d56a994cfddb47cd86071b6408905be70f10f7fcf668fc9e1cf"
+    },
+    "source": {
+      "url": "https://kerberos.org/dist/krb5/1.22/krb5-1.22.2.tar.gz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "3243ffbc8ea4d4ac22ddc7dd2a1dc54c57874c40648b60ff97009763554eaf13"
+    },
+    "dependencies": [
+      "openssl@4"
+    ]
+  },
+  "readline": {
+    "name": "readline",
+    "version": "8.3.6",
+    "license": "GPL-3.0-or-later",
+    "bottle": {
+      "cellar": ":any",
+      "url": "https://ghcr.io/v2/homebrew/core/readline/blobs/sha256:15cdd69af824537192843db389cbfd2459b3797cf4f36c906f8f8ab617d7d59f",
+      "sha256": "15cdd69af824537192843db389cbfd2459b3797cf4f36c906f8f8ab617d7d59f"
+    },
+    "source": {
+      "url": "https://ftpmirror.gnu.org/readline/readline-8.3.tar.gz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "fe5383204467828cd495ee8d1d3c037a7eba1389c22bc6a041f627976f9061cc"
+    },
+    "dependencies": []
+  },
+  "libsodium": {
+    "name": "libsodium",
+    "version": "1.0.22",
+    "license": "ISC",
+    "bottle": {
+      "cellar": ":any",
+      "url": "https://ghcr.io/v2/homebrew/core/libsodium/blobs/sha256:665929906297818edf15955cf4e4faefca7d717271c9fa448291989d2511d266",
+      "sha256": "665929906297818edf15955cf4e4faefca7d717271c9fa448291989d2511d266"
+    },
+    "source": {
+      "url": "https://download.libsodium.org/libsodium/releases/libsodium-1.0.22.tar.gz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "adbdd8f16149e81ac6078a03aca6fc03b592b89ef7b5ed83841c086191be3349"
+    },
+    "dependencies": []
+  },
+  "libzip": {
+    "name": "libzip",
+    "version": "1.12",
+    "license": "BSD-3-Clause",
+    "bottle": {
+      "cellar": ":any",
+      "url": "https://ghcr.io/v2/homebrew/core/libzip/blobs/sha256:24a451df5142724086a16439fac719df1b0da9fa0c68a1bfe0133f5db51f05e6",
+      "sha256": "24a451df5142724086a16439fac719df1b0da9fa0c68a1bfe0133f5db51f05e6"
+    },
+    "source": {
+      "url": "https://libzip.org/download/libzip-1.12.tar.xz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "376908d0f0fda13180a19fdc4f7062a1abfb59e09ca07a392d361253b8e60c2b"
+    },
+    "dependencies": [
+      "xz",
+      "zstd"
+    ]
+  },
+  "net-snmp": {
+    "name": "net-snmp",
+    "version": "5.9.5.2",
+    "license": "MIT-CMU AND MIT AND BSD-3-Clause",
+    "bottle": {
+      "cellar": "/opt/homebrew/Cellar",
+      "url": "https://ghcr.io/v2/homebrew/core/net-snmp/blobs/sha256:ea1257eafed4f0743dbd5ee1858711b162e5b9e222af987f67343eb638cb4551",
+      "sha256": "ea1257eafed4f0743dbd5ee1858711b162e5b9e222af987f67343eb638cb4551"
+    },
+    "source": {
+      "url": "https://downloads.sourceforge.net/project/net-snmp/net-snmp/5.9.5.2/net-snmp-5.9.5.2.tar.gz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "16707719f833184a4b72835dac359ae188123b06b5e42817c00790d7dc1384bf"
+    },
+    "dependencies": [
+      "openssl@4"
+    ]
+  },
+  "oniguruma": {
+    "name": "oniguruma",
+    "version": "6.9.10",
+    "license": "BSD-2-Clause",
+    "bottle": {
+      "cellar": ":any",
+      "url": "https://ghcr.io/v2/homebrew/core/oniguruma/blobs/sha256:eb6bda3b333f497b5d294388f39fd0902a5c79a52ae16858eff711d2d104cc4d",
+      "sha256": "eb6bda3b333f497b5d294388f39fd0902a5c79a52ae16858eff711d2d104cc4d"
+    },
+    "source": {
+      "url": "https://github.com/kkos/oniguruma/releases/download/v6.9.10/onig-6.9.10.tar.gz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "2a5cfc5ae259e4e97f86b68dfffc152cdaffe94e2060b770cb827238d769fc05"
+    },
+    "dependencies": []
+  },
+  "openldap": {
+    "name": "openldap",
+    "version": "2.7.1",
+    "license": "OLDAP-2.8",
+    "bottle": {
+      "cellar": "/opt/homebrew/Cellar",
+      "url": "https://ghcr.io/v2/homebrew/core/openldap/blobs/sha256:1c976928f9b9091e0588a9367cefdd8be14ba0ec42d29f9deb4f4a889699da97",
+      "sha256": "1c976928f9b9091e0588a9367cefdd8be14ba0ec42d29f9deb4f4a889699da97"
+    },
+    "source": {
+      "url": "https://www.openldap.org/software/download/OpenLDAP/openldap-release/openldap-2.7.1.tgz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "253db80f301258ea69cda1184766d57395b836aaabf41157eb0316eb0fac1341"
+    },
+    "dependencies": [
+      "openssl@4"
+    ]
+  },
+  "sqlite": {
+    "name": "sqlite",
+    "version": "3.54.0",
+    "license": "blessing",
+    "bottle": {
+      "cellar": ":any",
+      "url": "https://ghcr.io/v2/homebrew/core/sqlite/blobs/sha256:7d95089d3dd3abf4aec197d1f91964d14d6481713e55411b9838ea5e969588dc",
+      "sha256": "7d95089d3dd3abf4aec197d1f91964d14d6481713e55411b9838ea5e969588dc"
+    },
+    "source": {
+      "url": "https://www.sqlite.org/2026/sqlite-autoconf-3540000.tar.gz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "134ec0802dda5795816e25d25872d20b312cb3973438c49b30bc40b7705ea9ed"
+    },
+    "dependencies": [
+      "readline"
+    ]
+  },
+  "tidy-html5": {
+    "name": "tidy-html5",
+    "version": "5.8.0",
+    "license": "Zlib",
+    "bottle": {
+      "cellar": ":any",
+      "url": "https://ghcr.io/v2/homebrew/core/tidy-html5/blobs/sha256:613a88aa2c9aac81af122ec9ee6e2278788e1b5c4398f1139b123555390adcdd",
+      "sha256": "613a88aa2c9aac81af122ec9ee6e2278788e1b5c4398f1139b123555390adcdd"
+    },
+    "source": {
+      "url": "https://github.com/htacg/tidy-html5/archive/refs/tags/5.8.0.tar.gz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "59c86d5b2e452f63c5cdb29c866a12a4c55b1741d7025cf2f3ce0cde99b0660e"
+    },
+    "dependencies": []
+  },
+  "gnutls": {
+    "name": "gnutls",
+    "version": "3.8.13",
+    "license": "LGPL-2.1-or-later AND GPL-3.0-only",
+    "bottle": {
+      "cellar": ":any",
+      "url": "https://ghcr.io/v2/homebrew/core/gnutls/blobs/sha256:a2334eb50a165945aad7df804a3e846053de62973f6aee8060fec8c16c59446b",
+      "sha256": "a2334eb50a165945aad7df804a3e846053de62973f6aee8060fec8c16c59446b"
+    },
+    "source": {
+      "url": "https://www.gnupg.org/ftp/gcrypt/gnutls/v3.8/gnutls-3.8.13.tar.xz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "ffed8ec1bf09c2426d4f14aae377de4753b53e537d685e604e99a8b16ca9c97e"
+    },
+    "dependencies": [
+      "ca-certificates",
+      "gmp",
+      "libidn2",
+      "libtasn1",
+      "libunistring",
+      "nettle",
+      "p11-kit",
+      "gettext"
+    ]
+  },
+  "libidn2": {
+    "name": "libidn2",
+    "version": "2.3.8",
+    "license": "(GPL-2.0-or-later OR LGPL-3.0-or-later) AND (Unicode-TOU AND Unicode-DFS-2016) AND GPL-3.0-or-later AND LGPL-2.1-or-later AND FSFAP-no-warranty-disclaimer",
+    "bottle": {
+      "cellar": "/opt/homebrew/Cellar",
+      "url": "https://ghcr.io/v2/homebrew/core/libidn2/blobs/sha256:f8f1b459f15a4ac11d2dce786a9140509782227b7d499cbdf3a1279dd325d90b",
+      "sha256": "f8f1b459f15a4ac11d2dce786a9140509782227b7d499cbdf3a1279dd325d90b"
+    },
+    "source": {
+      "url": "https://ftpmirror.gnu.org/libidn/libidn2-2.3.8.tar.gz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "f557911bf6171621e1f72ff35f5b1825bb35b52ed45325dcdee931e5d3c0787a"
+    },
+    "dependencies": [
+      "libunistring",
+      "gettext"
+    ]
+  },
+  "libtasn1": {
+    "name": "libtasn1",
+    "version": "4.21.0",
+    "license": "LGPL-2.1-or-later",
+    "bottle": {
+      "cellar": ":any",
+      "url": "https://ghcr.io/v2/homebrew/core/libtasn1/blobs/sha256:ae01713eec0bd922b903ed2bf514dc085ec3108636c4ead84614b23a2c33f267",
+      "sha256": "ae01713eec0bd922b903ed2bf514dc085ec3108636c4ead84614b23a2c33f267"
+    },
+    "source": {
+      "url": "https://ftpmirror.gnu.org/libtasn1/libtasn1-4.21.0.tar.gz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "1d8a444a223cc5464240777346e125de51d8e6abf0b8bac742ac84609167dc87"
+    },
+    "dependencies": []
+  },
+  "nettle": {
+    "name": "nettle",
+    "version": "4.0",
+    "license": "GPL-2.0-or-later OR LGPL-3.0-or-later",
+    "bottle": {
+      "cellar": ":any",
+      "url": "https://ghcr.io/v2/homebrew/core/nettle/blobs/sha256:ba11eb261bc502c28c9cd695f8354306d0a31cb1e55c3d3f1568e051293a0f10",
+      "sha256": "ba11eb261bc502c28c9cd695f8354306d0a31cb1e55c3d3f1568e051293a0f10"
+    },
+    "source": {
+      "url": "https://ftpmirror.gnu.org/nettle/nettle-4.0.tar.gz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "3addbc00da01846b232fb3bc453538ea5468da43033f21bb345cb1e9073f5094"
+    },
+    "dependencies": [
+      "gmp"
+    ]
+  },
+  "p11-kit": {
+    "name": "p11-kit",
+    "version": "0.26.5",
+    "license": "BSD-3-Clause",
+    "bottle": {
+      "cellar": "/opt/homebrew/Cellar",
+      "url": "https://ghcr.io/v2/homebrew/core/p11-kit/blobs/sha256:fd108a936783ac40b4c3ea4dda639e7d22faa063e9f40f92b0ed2b2a7e99efa6",
+      "sha256": "fd108a936783ac40b4c3ea4dda639e7d22faa063e9f40f92b0ed2b2a7e99efa6"
+    },
+    "source": {
+      "url": "https://github.com/p11-glue/p11-kit/releases/download/0.26.5/p11-kit-0.26.5.tar.xz",
+      "tag": null,
+      "revision": null,
+      "using": null,
+      "checksum": "f2cc09111e44bf3fea58f023180b33acea90aa82d042d6fbb623fbc5ba033bb7"
+    },
+    "dependencies": [
+      "ca-certificates",
+      "libtasn1"
+    ]
+  }
+}

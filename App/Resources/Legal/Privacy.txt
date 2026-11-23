@@ -1,0 +1,24 @@
+moko privacy information
+version: 22 november 2026
+contact: contato@otavioaugustosw.com
+
+local application
+moko stores settings, project paths and application-owned database files on your Mac. Saved connection passwords are stored in macOS Keychain. The included PostgreSQL, PHP and MariaDB services listen on loopback by default. An external SQL connection sends requests to the server that you choose.
+
+moko does not include application analytics, advertising SDKs, automatic database uploads or an account service. The publisher does not receive your databases, saved passwords or project files through a built-in moko collection service. The websites, PHP code, SQL and other software you run can make their own network requests; this notice does not describe or control their behavior.
+
+logs and exports
+Service logs and SQL exports are local files. They may contain project or database content. Check them before sharing them. Closing the window does not erase data or stop the services; quitting the application stops services that it owns. Removing the application does not automatically remove your database data or Keychain entries.
+
+ai agents
+Agent access is off until you turn it on in settings → agents. When it is on, an AI agent that you configure (for example Claude Code) can start moko's helper on this Mac and, through it, read the names and structure of your databases and run SQL with the saved account of each connection. Saved passwords are not given to the agent. Whatever the agent reads is then handled by that agent and its provider under their own terms; moko does not send it anywhere else. Each call is recorded in a local file, Agent Activity.log, in moko's Application Support folder. Turn the setting off to stop access immediately.
+
+optional component downloads
+Builds that already include MariaDB do not download components. In other builds, checking for component versions contacts GitHub. Installing a component downloads its package from the published GitHub Releases endpoint. GitHub receives ordinary connection/request details such as your IP address. Moko does not send project files, database contents, passwords or source code in these requests. Downloads occur only after your action; updates require confirmation. The component catalog, checksums, publisher signature and Apple notarization are verified before activation.
+
+external links and support
+The Buy Me a Coffee link opens that provider in your browser. Its privacy and payment policies govern that interaction. Your browser and the download website may transmit information such as IP addresses and request details to their operators. This local-app notice does not claim that the download website is free of logs or cookies.
+
+If you email support, the publisher receives the information that you voluntarily provide. Do not send passwords, production database exports, personal data belonging to other people or confidential source code. The website/support operator must publish the applicable retention, legal-basis and rights-handling details before public release. Contact the address above for privacy questions.
+
+This notice describes the current application design. Public packaging requires a reviewed website/support privacy notice matching the actual hosting and support providers. Adding crash reporting, an updater, accounts or analytics requires updating this notice and reviewing the new data flows.

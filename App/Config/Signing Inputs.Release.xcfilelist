@@ -1,0 +1,2 @@
+$(DERIVED_FILE_DIR)/moko-runtime-embed.stamp
+$(TARGET_BUILD_DIR)/$(EXECUTABLE_PATH)

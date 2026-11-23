@@ -1,0 +1,76 @@
+{
+  "features" : [
+    "refractivity",
+    "specular-location"
+  ],
+  "fill" : {
+    "automatic-gradient" : "srgb:0.89804,0.92157,0.20392,1.00000"
+  },
+  "groups" : [
+    {
+      "blur-material" : null,
+      "hidden" : false,
+      "layers" : [
+        {
+          "fill-specializations" : [
+            {
+              "value" : {
+                "automatic-gradient" : "display-p3:0.00000,0.00000,0.00000,1.00000"
+              }
+            },
+            {
+              "appearance" : "dark",
+              "value" : {
+                "automatic-gradient" : "display-p3:0.89648,0.91455,0.33569,1.00000"
+              }
+            },
+            {
+              "appearance" : "tinted",
+              "value" : {
+                "automatic-gradient" : "display-p3:0.98390,1.00000,0.37967,1.00000"
+              }
+            }
+          ],
+          "glass" : true,
+          "image-name" : "Mascot.svg",
+          "name" : "Mascot",
+          "position" : {
+            "scale" : 0.98,
+            "translation-in-points" : [
+              0,
+              0
+            ]
+          }
+        }
+      ],
+      "lighting" : "individual",
+      "position" : {
+        "scale" : 0.9,
+        "translation-in-points" : [
+          0,
+          0
+        ]
+      },
+      "refractivity" : {
+        "depth" : 0,
+        "enabled" : true,
+        "strength" : 1
+      },
+      "shadow" : {
+        "kind" : "layer-color",
+        "opacity" : 0.5
+      },
+      "specular" : "inside",
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.62
+      }
+    }
+  ],
+  "supported-platforms" : {
+    "circles" : [
+      "watchOS"
+    ],
+    "squares" : "shared"
+  }
+}

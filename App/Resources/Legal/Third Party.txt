@@ -1,0 +1,24 @@
+third-party software
+
+moko includes independent open-source software next to its own code, which is licensed under the GNU General Public License version 3 or later. The application includes PostgreSQL, PHP and, in builds that say "mariadb · included" in settings → components, MariaDB Server. Each server runs as its own process; the application talks to it over a local connection.
+
+License texts, copyright notices and pinned component metadata are bundled in Contents/Resources/Runtime/Licenses ("open component licenses" below). Manifest.json in Contents/Resources/Runtime lists every component, its version, its license and its upstream source.
+
+PostgreSQL Server and libpq: PostgreSQL License.
+MariaDB Server and its utilities: GNU General Public License version 2. They are separate programs, not linked into moko.
+MariaDB Connector/C: GNU Lesser General Public License 2.1 or later, dynamically linked.
+OpenSSL: Apache License 2.0.
+PHP/Zend: the BSD terms available from the PHP Group are selected for eligible PHP/Zend code; third-party contributions retain their own licenses. This product includes PHP software, freely available from <http://www.php.net/software/>.
+GnuTLS, nettle, GMP, libidn2, libunistring, libtasn1 and gettext, used by the MariaDB client programs: GNU LGPL or dual GNU GPL/LGPL terms, as stated in each notice.
+CA certificates extracted from Mozilla: MPL 2.0.
+Other libraries: see the component notices for the applicable license and chosen alternatives.
+
+corresponding source
+The complete corresponding source of the bundled third-party binaries (upstream sources, modifications, build recipes and LGPL replacement instructions) is published, free of charge and independently of donations, at:
+https://github.com/otavioaugustosw/moko/releases/tag/runtime-sources-2026-10-12
+The base and MariaDB sources are separate release assets of the same repository that holds the source code of moko itself, https://github.com/otavioaugustosw/moko; the automatic repository archive does not include them.
+
+If a download is unavailable, write to contato@otavioaugustosw.com: for at least three years after the release of this version, the same source will be provided for no more than the cost of physically performing the distribution.
+
+trademarks
+PostgreSQL, MariaDB, MySQL and PHP are trademarks of their respective owners. moko is an independent project and is not affiliated with, sponsored by or endorsed by them. The names are used only to identify the software that moko runs or connects to.

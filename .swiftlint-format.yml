@@ -1,0 +1,15 @@
+# Formatting pass only. lint.sh still validates ALL rules from .swiftlint.yml.
+only_rules:
+  - colon
+  - comma
+  - opening_brace
+  - closing_brace
+  - trailing_whitespace
+  - vertical_whitespace
+  - statement_position
+  - switch_case_alignment
+  - return_arrow_whitespace
+  - trailing_comma
+  - implicit_optional_initialization
+trailing_comma:
+  mandatory_comma: true

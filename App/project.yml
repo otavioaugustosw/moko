@@ -1,0 +1,314 @@
+name: moko
+options:
+  minimumXcodeGenVersion: 2.46.0
+  deploymentTarget:
+    macOS: "26.0"
+  createIntermediateGroups: true
+  groupSortPosition: top
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    SWIFT_TREAT_WARNINGS_AS_ERRORS: YES
+    GCC_TREAT_WARNINGS_AS_ERRORS: YES
+    MACOSX_DEPLOYMENT_TARGET: "26.0"
+    ARCHS: arm64
+    ENABLE_USER_SCRIPT_SANDBOXING: NO
+    HEADER_SEARCH_PATHS: ["$(inherited)", "$(SRCROOT)/../Local/Runtime/Payload/Headers/mariadb", "$(SRCROOT)/../Local/Runtime/Payload/Headers/PostgreSQL"]
+    LIBRARY_SEARCH_PATHS: ["$(inherited)", "$(SRCROOT)/../Local/Runtime/Payload/Frameworks"]
+    SWIFT_INCLUDE_PATHS: ["$(inherited)", "$(SRCROOT)/Sources/Bridges/NativeBindings", "$(SRCROOT)/Sources/Bridges"]
+    COMPRESS_PNG_FILES: NO
+    CODE_SIGNING_ALLOWED: NO
+  configs:
+    Release:
+      SWIFT_OPTIMIZATION_LEVEL: -O
+      DEBUG_INFORMATION_FORMAT: dwarf-with-dsym
+      DEPLOYMENT_POSTPROCESSING: YES
+      STRIP_INSTALLED_PRODUCT: YES
+      STRIP_STYLE: debugging
+      OTHER_SWIFT_FLAGS: ["$(inherited)", "-file-prefix-map", "$(SRCROOT)=/moko/App"]
+      OTHER_CFLAGS: ["$(inherited)", "-ffile-prefix-map=$(SRCROOT)=/moko/App"]
+targetTemplates:
+  DatabaseTool:
+    type: tool
+    platform: macOS
+    sources:
+      - path: Sources/Servers
+      - path: Sources/Core.swift
+      - path: Sources/NewTableDraft.swift
+      - path: Sources/Databases.swift
+      - path: Sources/DatabaseTypes.swift
+      - path: Sources/DatabaseSQL.swift
+      - path: Sources/DatabaseEngine.swift
+      - path: Sources/PostgreSQLDriver.swift
+      - path: Sources/PostgreSQLResults.swift
+      - path: Sources/PostgreSQLSQL.swift
+      - path: Sources/PostgreSQLConstraint.swift
+      - path: Sources/PostgreSQLColumn.swift
+      - path: Sources/PostgreSQLObjects.swift
+      - path: Sources/SQLQueryJob.swift
+      - path: Sources/MySQLQueryContext.swift
+      - path: Sources/ColumnDefinitionParts.swift
+      - path: Sources/DatabaseObjects.swift
+      - path: Sources/DatabaseObjectLibrary.swift
+      - path: Sources/RoutineSQLType.swift
+      - path: Sources/SQLParameterSyntax.swift
+      - path: Sources/Bridges/MySQLBridge.c
+      - path: Sources/Bridges/DatabaseBridge.c
+        compilerFlags: '-include "$(SRCROOT)/Sources/Bridges/NativeBindings/DatabaseNative.h"'
+      - path: Sources/Bridges/NativeBindings
+        buildPhase: none
+    dependencies:
+      - sdk: AppKit.framework
+      - sdk: SwiftUI.framework
+      - sdk: Security.framework
+    settings:
+      base:
+        OTHER_LDFLAGS: ["$(inherited)", "-lmariadb", "-lpq"]
+        LD_RUNPATH_SEARCH_PATHS: ["$(SRCROOT)/../Local/Runtime/Payload/Frameworks"]
+targets:
+  moko:
+    type: application
+    platform: macOS
+    configFiles:
+      Debug: Config/App.xcconfig
+      Release: Config/App.xcconfig
+    sources:
+      - path: Sources
+        excludes: ["Bridges/NativeBindings/**", "Bridges/PostgresNative/**", "Bridges/DatabaseBridge.c"]
+      - path: Sources/Bridges/DatabaseBridge.c
+        compilerFlags: '-include "$(SRCROOT)/Sources/Bridges/NativeBindings/DatabaseNative.h"'
+      - path: Sources/Bridges/NativeBindings
+        buildPhase: none
+      - path: Resources/Assets.xcassets
+        buildPhase: resources
+      - path: Resources/moko.icon
+        type: file
+        buildPhase: resources
+      - path: Resources/RuntimeTrust.json
+        buildPhase: resources
+      - path: Resources/Legal
+        type: folder
+        buildPhase: resources
+      - path: Config/Info.plist
+        buildPhase: none
+      - path: project.yml
+        buildPhase: none
+    dependencies:
+      - sdk: AppKit.framework
+      - sdk: SwiftUI.framework
+      - sdk: Security.framework
+    settings:
+      base:
+        PRODUCT_NAME: moko
+        EXECUTABLE_NAME: moko
+        PRODUCT_BUNDLE_IDENTIFIER: com.otavioaugustosw.moko
+        INFOPLIST_FILE: Config/Info.plist
+        GENERATE_INFOPLIST_FILE: NO
+        ASSETCATALOG_COMPILER_APPICON_NAME: moko
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        OTHER_LDFLAGS: ["$(inherited)", "-lmariadb", "-lpq"]
+        CODE_SIGNING_ALLOWED: YES
+        CODE_SIGN_STYLE: Manual
+        CODE_SIGN_IDENTITY: Apple Development
+        ENABLE_HARDENED_RUNTIME: YES
+        LD_RUNPATH_SEARCH_PATHS: ["@executable_path/../Frameworks"]
+    preBuildScripts:
+      - name: SwiftLint
+        script: 'zsh "$SRCROOT/Support/lint.sh" && touch "$DERIVED_FILE_DIR/moko-swiftlint.stamp"'
+        inputFileLists: ['$(SRCROOT)/Config/SwiftLint Inputs.xcfilelist']
+        outputFiles: ['$(DERIVED_FILE_DIR)/moko-swiftlint.stamp']
+        basedOnDependencyAnalysis: true
+    postCompileScripts:
+      - name: Prepare bundled runtimes
+        script: 'python3 "$SRCROOT/Support/embed-runtimes.py" "$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH"'
+        inputFileLists: ['$(SRCROOT)/Config/Runtime Inputs.xcfilelist']
+        outputFiles:
+          - '$(DERIVED_FILE_DIR)/moko-runtime-embed.stamp'
+          - '$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/Runtime/PostgreSQL/bin/postgres'
+          - '$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/Runtime/PHP/bin/php'
+          - '$(TARGET_BUILD_DIR)/$(CONTENTS_FOLDER_PATH)/Frameworks/libpq.5.dylib'
+          - '$(TARGET_BUILD_DIR)/$(CONTENTS_FOLDER_PATH)/Frameworks/libmariadb.3.dylib'
+        basedOnDependencyAnalysis: true
+    postBuildScripts:
+      - name: Prepare executable signing
+        script: |
+          # Canvas can skip the final CodeSign phase after replacing JIT libraries.
+          # Preserve Xcode's entitlements and seal the updated Debug bundle.
+          if [ "$CONFIGURATION" != Release ]; then
+            if [ "$CODE_SIGNING_ALLOWED" = YES ] && [ -n "$EXPANDED_CODE_SIGN_IDENTITY" ]; then
+              if ! /usr/bin/codesign --verify --strict "$TARGET_BUILD_DIR/$WRAPPER_NAME" >/dev/null 2>&1; then
+                /usr/bin/codesign --force --sign "$EXPANDED_CODE_SIGN_IDENTITY" \
+                  --preserve-metadata=entitlements,requirements,flags --timestamp=none \
+                  "$TARGET_BUILD_DIR/$WRAPPER_NAME"
+              fi
+            fi
+            touch "$DERIVED_FILE_DIR/moko-executable-signing.stamp"
+            exit 0
+          fi
+          if [ "$CODE_SIGNING_ALLOWED" = YES ] && [ -n "$EXPANDED_CODE_SIGN_IDENTITY" ]; then
+            for library in "$TARGET_BUILD_DIR/$EXECUTABLE_FOLDER_PATH"/*.dylib; do
+              if [ -f "$library" ]; then
+                /usr/bin/codesign --force --sign "$EXPANDED_CODE_SIGN_IDENTITY" --options runtime --timestamp=none "$library"
+              fi
+            done
+          fi
+          if [ "$CONFIGURATION" = Release ]; then
+            executable="$TARGET_BUILD_DIR/$EXECUTABLE_PATH"
+            if /usr/bin/codesign -d "$executable" >/dev/null 2>&1; then
+              /usr/bin/codesign --remove-signature "$executable"
+            fi
+          fi
+          touch "$DERIVED_FILE_DIR/moko-executable-signing.stamp"
+        inputFileLists: ['$(SRCROOT)/Config/Signing Inputs.$(CONFIGURATION).xcfilelist']
+        outputFiles: ['$(DERIVED_FILE_DIR)/moko-executable-signing.stamp']
+        basedOnDependencyAnalysis: true
+  RefreshChecks:
+    templates: [DatabaseTool]
+    sources: [Tests/RefreshCheck.swift]
+  FormChecks:
+    templates: [DatabaseTool]
+    sources: [Tests/DatabaseFormChecks.swift, Tests/SQLEditorChecks.swift, Tests/DatabaseImportPolicyChecks.swift]
+  ConnectionChecks:
+    templates: [DatabaseTool]
+    sources: [Tests/ConnectionTestChecks.swift]
+  CatalogSigner:
+    type: tool
+    platform: macOS
+    sources: [Tools/CatalogSigner/main.swift]
+  ComponentChecks:
+    templates: [DatabaseTool]
+    sources: [Tests/ComponentChecks.swift, Tests/DatabaseUtilityChecks.swift, Tests/AgentAccessChecks.swift]
+  RuntimeInstallChecks:
+    templates: [DatabaseTool]
+    sources: [Tests/Installation]
+    settings:
+      base:
+        SWIFT_ACTIVE_COMPILATION_CONDITIONS: DEBUG
+  PHPProjects:
+    templates: [DatabaseTool]
+    sources: [Tests/PHPProjectChecks.swift]
+  SigningContinuityCheck:
+    type: tool
+    platform: macOS
+    sources: [Tests/Signing/Continuity/main.swift]
+    dependencies:
+      - sdk: Security.framework
+  SigningIdentity:
+    type: tool
+    platform: macOS
+    sources: [Tests/Signing/Identity/main.swift]
+    dependencies:
+      - sdk: Security.framework
+  mokoInterfaceHost:
+    type: application
+    platform: macOS
+    configFiles:
+      Debug: Config/App.xcconfig
+      Release: Config/App.xcconfig
+    sources:
+      - path: Sources
+        excludes: ["Main.swift", "Diagnostics/**", "Bridges/NativeBindings/**", "Bridges/PostgresNative/**", "Bridges/DatabaseBridge.c"]
+      - path: Sources/Bridges/DatabaseBridge.c
+        compilerFlags: '-include "$(SRCROOT)/Sources/Bridges/NativeBindings/DatabaseNative.h"'
+      - path: Tests/Interface/Support
+      - path: Resources/Assets.xcassets
+        buildPhase: resources
+      - path: Resources/Legal
+        type: folder
+        buildPhase: resources
+      - path: Resources/RuntimeTrust.json
+        buildPhase: resources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.otavioaugustosw.moko.interfacehost
+        PRODUCT_NAME: mokoInterfaceHost
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_CFBundleDisplayName: moko interface tests
+        CODE_SIGNING_ALLOWED: YES
+        CODE_SIGN_STYLE: Manual
+        CODE_SIGN_IDENTITY: Apple Development
+        SWIFT_ACTIVE_COMPILATION_CONDITIONS: DEBUG
+        OTHER_LDFLAGS: ["$(inherited)", "-lmariadb", "-lpq"]
+        LD_RUNPATH_SEARCH_PATHS: ["$(SRCROOT)/../Local/Runtime/Payload/Frameworks"]
+  mokoComponentTests:
+    type: bundle.unit-test
+    platform: macOS
+    configFiles:
+      Debug: Config/App.xcconfig
+      Release: Config/App.xcconfig
+    sources:
+      - path: Tests/Interface/ComponentTests
+      - path: Tests/Interface/Resources
+        buildPhase: resources
+    dependencies:
+      - target: mokoInterfaceHost
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.otavioaugustosw.moko.componenttests
+        GENERATE_INFOPLIST_FILE: YES
+        TEST_HOST: '$(BUILT_PRODUCTS_DIR)/mokoInterfaceHost.app/Contents/MacOS/mokoInterfaceHost'
+        BUNDLE_LOADER: '$(TEST_HOST)'
+        CODE_SIGNING_ALLOWED: YES
+        CODE_SIGN_STYLE: Manual
+        CODE_SIGN_IDENTITY: Apple Development
+  mokoUITests:
+    type: bundle.ui-testing
+    platform: macOS
+    configFiles:
+      Debug: Config/App.xcconfig
+      Release: Config/App.xcconfig
+    sources: [Tests/Interface/UITests]
+    dependencies:
+      - target: mokoInterfaceHost
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.otavioaugustosw.moko.uitests
+        GENERATE_INFOPLIST_FILE: YES
+        TEST_TARGET_NAME: mokoInterfaceHost
+        CODE_SIGNING_ALLOWED: YES
+        CODE_SIGN_STYLE: Manual
+        CODE_SIGN_IDENTITY: Apple Development
+schemes:
+  moko:
+    build:
+      targets:
+        moko: all
+    run:
+      config: Debug
+  Checks:
+    build:
+      targets:
+        RefreshChecks: all
+        FormChecks: all
+        ConnectionChecks: all
+        PHPProjects: all
+        ComponentChecks: all
+        CatalogSigner: all
+  ConnectionChecks:
+    build:
+      targets:
+        ConnectionChecks: all
+    run:
+      config: Release
+  Signing:
+    build:
+      targets:
+        SigningContinuityCheck: all
+        SigningIdentity: all
+  RuntimeInstallChecks:
+    build:
+      targets:
+        RuntimeInstallChecks: all
+        ComponentChecks: all
+  Interface:
+    build:
+      targets:
+        mokoInterfaceHost: all
+        mokoComponentTests: [test]
+        mokoUITests: [test]
+    test:
+      config: Debug
+      targets:
+        - name: mokoComponentTests
+        - name: mokoUITests
+      gatherCoverageData: true
