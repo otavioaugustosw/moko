@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Fetch pinned macOS 26 arm64 runtimes into Local; never installs a Homebrew service.
-Usage: python3 'Scripts/Preparar Runtime.py' [--refresh-lock]
+Usage: python3 App/Support/Runtime/prepare-runtime.py [--refresh-lock]
 """
 import argparse
 import hashlib
@@ -12,9 +12,9 @@ import tarfile
 import urllib.request
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = Path(__file__).resolve().parents[3]
 CACHE = ROOT / 'Local/Runtime'
-LOCK = ROOT / 'Aplicativo/Configurações/Runtime.lock.json'
+LOCK = ROOT / 'App/Config/Runtime.lock.json'
 FORMULAE = ['mariadb@11.8', 'mariadb-connector-c', 'php@8.4']
 
 
