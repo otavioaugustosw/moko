@@ -73,8 +73,8 @@ jobs:
     name: App build (non-blocking)
     runs-on: macos-26
     timeout-minutes: 30
-    # actool on the hosted macos-26 image raises an exception compiling Resources/moko.icon
-    # ("attempt to insert nil object"). Kept visible but non-blocking until that is resolved.
+    # Needs Xcode 27 (moko.icon); Xcode 26.x actool raises "attempt to insert nil object" on it.
+    # Non-blocking until the image's Xcode 27 is confirmed.
     continue-on-error: true
     steps:
       - uses: actions/checkout@v5
@@ -84,6 +84,11 @@ jobs:
       - name: Build the app (ad-hoc signed, embeds the runtimes)
         run: |
           set -o pipefail
+          # moko.icon is authored with Xcode 27.2; older actool crashes on it.
+          ls -d /Applications/Xcode*.app
+          xcode="$(ls -d /Applications/Xcode_27.2*.app /Applications/Xcode_27*.app 2>/dev/null | head -1)"
+          if [ -z "$xcode" ]; then echo "::error::Xcode 27 is not installed on this runner image"; exit 1; fi
+          export DEVELOPER_DIR="$xcode/Contents/Developer"
           xcodebuild -version
           xcodebuild build -project App/moko.xcodeproj -scheme moko -configuration Debug \
             -derivedDataPath build -destination 'platform=macOS,arch=arm64' \
