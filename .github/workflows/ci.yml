@@ -93,11 +93,46 @@ jobs:
             echo "::endgroup::"
           done
 
-  interface:
-    name: Interface tests (XCTest)
+  component-tests:
+    name: Component tests (XCTest)
     runs-on: macos-26
     timeout-minutes: 40
-    # UI tests on hosted runners still need to prove stable; flip to blocking once green for a while.
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Compile-only runtime payload
+        run: |
+          brew install libpq mariadb-connector-c
+          pq="$(brew --prefix libpq)"; maria="$(brew --prefix mariadb-connector-c)"
+          payload=Local/Runtime/Payload
+          mkdir -p "$payload/Headers/PostgreSQL" "$payload/Headers/mariadb" "$payload/Frameworks"
+          cp -R "$pq/include/." "$payload/Headers/PostgreSQL/"
+          cp -R "$maria/include/mariadb/." "$payload/Headers/mariadb/"
+          cp -L "$pq/lib/libpq.5.dylib" "$maria/lib/mariadb/libmariadb.3.dylib" "$payload/Frameworks/"
+          ln -sf libpq.5.dylib "$payload/Frameworks/libpq.dylib"
+          ln -sf libmariadb.3.dylib "$payload/Frameworks/libmariadb.dylib"
+
+      - name: Test mokoComponentTests (ad-hoc signed)
+        run: |
+          set -o pipefail
+          xcodebuild test -project App/moko.xcodeproj -scheme Interface \
+            -derivedDataPath build -destination 'platform=macOS,arch=arm64' \
+            -resultBundlePath build/ComponentTests.xcresult -only-testing:mokoComponentTests \
+            CODE_SIGN_IDENTITY=- CODE_SIGN_STYLE=Manual DEVELOPMENT_TEAM= | xcbeautify || exit 1
+
+      - name: Upload result bundle
+        if: failure()
+        uses: actions/upload-artifact@v5
+        with:
+          name: ComponentTests.xcresult
+          path: build/ComponentTests.xcresult
+
+  ui-tests:
+    name: UI tests (XCTest, non-blocking)
+    runs-on: macos-26
+    timeout-minutes: 40
+    # 6 of 13 UI tests (mostly contrast checks) fail on hosted runners, likely display-dependent.
+    # Kept visible but non-blocking until they pass there. Do not make this a required check yet.
     continue-on-error: true
     steps:
       - uses: actions/checkout@v5
@@ -114,17 +149,17 @@ jobs:
           ln -sf libpq.5.dylib "$payload/Frameworks/libpq.dylib"
           ln -sf libmariadb.3.dylib "$payload/Frameworks/libmariadb.dylib"
 
-      - name: Test Interface scheme (ad-hoc signed)
+      - name: Test mokoUITests (ad-hoc signed)
         run: |
           set -o pipefail
           xcodebuild test -project App/moko.xcodeproj -scheme Interface \
             -derivedDataPath build -destination 'platform=macOS,arch=arm64' \
-            -resultBundlePath build/Interface.xcresult \
+            -resultBundlePath build/UITests.xcresult -only-testing:mokoUITests \
             CODE_SIGN_IDENTITY=- CODE_SIGN_STYLE=Manual DEVELOPMENT_TEAM= | xcbeautify || exit 1
 
       - name: Upload result bundle
         if: failure()
         uses: actions/upload-artifact@v5
         with:
-          name: Interface.xcresult
-          path: build/Interface.xcresult
+          name: UITests.xcresult
+          path: build/UITests.xcresult
