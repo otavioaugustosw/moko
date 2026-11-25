@@ -1,0 +1,14 @@
+name: Runtime payload
+description: Fetch the pinned development runtime into Local/Runtime (cached by its pin).
+runs:
+  using: composite
+  steps:
+    - name: Cache runtime download
+      uses: actions/cache@v4
+      with:
+        path: Local/Runtime/Downloads
+        key: moko-runtime-${{ hashFiles('App/Config/Runtime.payload.json') }}
+
+    - name: Bootstrap Local/Runtime
+      shell: bash
+      run: python3 App/Support/bootstrap-runtime.py
