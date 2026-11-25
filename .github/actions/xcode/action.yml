@@ -1,0 +1,17 @@
+name: Xcode
+description: Select Xcode 27.2 (the project's Xcode) when installed, otherwise the image default, and print it.
+runs:
+  using: composite
+  steps:
+    - name: Select Xcode
+      shell: bash
+      run: |
+        ls -d /Applications/Xcode*.app
+        xcode="$(ls -d /Applications/Xcode_27.2*.app 2>/dev/null | sort -V | tail -1)"
+        if [ -n "$xcode" ]; then
+          echo "DEVELOPER_DIR=$xcode/Contents/Developer" >> "$GITHUB_ENV"
+          export DEVELOPER_DIR="$xcode/Contents/Developer"
+        else
+          echo "::warning::Xcode 27.2 is not on this image; using the default Xcode."
+        fi
+        xcodebuild -version
