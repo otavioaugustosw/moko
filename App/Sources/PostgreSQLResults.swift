@@ -13,6 +13,8 @@ struct PostgreSQLResults {
     private var truncated = false
     let limit: UInt32
 
+    init(limit: UInt32) { self.limit = limit }
+
     mutating func read(_ connection: OpaquePointer) {
         guard PQsetChunkedRowsMode(connection, 32) == 1 else {
             error = "could not enable bounded result retrieval"
