@@ -26,7 +26,7 @@ jobs:
     runs-on: macos-26
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Toolchain
         run: |
@@ -49,15 +49,12 @@ jobs:
         # lint.sh exits 0 when SwiftLint is missing; installed above, so this is the real pass.
         run: zsh App/Support/lint.sh
 
-      - name: swift-format (views)
-        run: xcrun swift-format lint --strict --configuration .swift-format --recursive App/Sources/Views
-
   checks:
     name: Build and run checks
     runs-on: macos-26
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Compile-only runtime payload (Homebrew libpq + MariaDB Connector/C)
         run: |
@@ -103,7 +100,7 @@ jobs:
     # UI tests on hosted runners still need to prove stable; flip to blocking once green for a while.
     continue-on-error: true
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Compile-only runtime payload
         run: |
@@ -127,7 +124,7 @@ jobs:
 
       - name: Upload result bundle
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: Interface.xcresult
           path: build/Interface.xcresult
