@@ -4,8 +4,8 @@
   "payload": {
     "tag": "dev-runtime-2026-10-12",
     "asset": "moko-dev-runtime-arm64.tar.xz",
-    "sha256": null,
-    "bytes": null
+    "sha256": "9c4e839daf80bca47ec0d585f03b194f392069834825b6ecbaf397dd55131cc9",
+    "bytes": 63490512
   },
   "sources": {
     "tag": "runtime-sources-2026-10-12",
