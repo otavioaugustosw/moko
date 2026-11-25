@@ -2,7 +2,7 @@
 """Build the selected local-development runtimes from verified source.
 
 No system service or database is installed. Build products stay inside --work.
-Usage: python3 'Construir Runtimes.py' --sources SOURCE_KIT --manifest LOCK --work WORK [--component server|php|connector]
+Usage: python3 build-runtimes.py --sources SOURCE_KIT --manifest LOCK --work WORK [--component server|php|connector]
 """
 import argparse
 import hashlib
@@ -164,7 +164,7 @@ def main():
     work = args.work.resolve()
     work.mkdir(parents=True, exist_ok=True)
     records = json.loads(args.manifest.read_text())
-    spec = importlib.util.spec_from_file_location('runtime_preparer', Path(__file__).with_name('Preparar Runtime.py'))
+    spec = importlib.util.spec_from_file_location('runtime_preparer', Path(__file__).with_name('prepare-runtime.py'))
     preparer = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(preparer)
     if args.cache:

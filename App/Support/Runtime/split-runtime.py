@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Extract only the optional MariaDB component and its dependency closure.
 
-Usage: python3 'Scripts/Dividir Runtime.py' FULL_PAYLOAD OUTPUT_DIRECTORY
+Usage: python3 App/Support/Runtime/split-runtime.py FULL_PAYLOAD OUTPUT_DIRECTORY
 The result is MariaDB.runtime, suitable for a separately signed/notarized DMG.
 """
 import argparse

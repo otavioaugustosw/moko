@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Assemble built, independently licensed runtimes and exact upstream notices.
 
-Usage: python3 'Montar Runtime.py' --manifest LOCK --sources SOURCES --work BUILD_WORK --output PAYLOAD [--cache CACHE]
+Usage: python3 assemble-runtime.py --manifest LOCK --sources SOURCES --work BUILD_WORK --output PAYLOAD [--cache CACHE]
 """
 import argparse
 import hashlib
@@ -22,7 +22,7 @@ def main():
     args = parser.parse_args()
     if args.base and args.mariadb_only: parser.error('choose only one distribution profile')
     records = json.loads(args.manifest.read_text())
-    spec = importlib.util.spec_from_file_location('preparer', Path(__file__).with_name('Preparar Runtime.py'))
+    spec = importlib.util.spec_from_file_location('preparer', Path(__file__).with_name('prepare-runtime.py'))
     preparer = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(preparer)
     if args.cache:
@@ -51,7 +51,7 @@ def main():
                         stream = contents.extractfile(member)
                         if stream:
                             (notices / name / member.name.replace('/', '__')).write_bytes(stream.read())
-    legal = Path(__file__).parent.parent / 'Aplicativo/Recursos/Legal'
+    legal = Path(__file__).resolve().parents[2] / 'Resources/Legal'
     if not legal.exists():
         legal = Path(__file__).parent / 'Legal'
     if 'ca-certificates' in records:
