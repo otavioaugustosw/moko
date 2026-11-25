@@ -1,0 +1,149 @@
+# Every job that compiles uses the real runtime payload pinned in App/Config/Runtime.payload.json,
+# fetched by App/Support/bootstrap-runtime.py through .github/actions/runtime (cached by its pin).
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+# The project is developed with Xcode 27.2 (moko.icon needs Xcode 27's actool), so every job runs
+# on the Xcode 27 image (macOS 27, arm64) and selects Xcode 27.2 when the image has it.
+jobs:
+  lint:
+    name: Lint and project drift
+    runs-on: xcode-27
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: ./.github/actions/xcode
+
+      - name: Toolchain
+        run: |
+          brew install swiftlint xcodegen
+          swiftlint version
+          xcodegen --version
+
+      - name: XcodeGen project is in sync with project.yml
+        run: |
+          cd App
+          xcodegen generate --spec project.yml
+          if ! git diff --quiet -- moko.xcodeproj; then
+            echo "::error file=App/project.yml::moko.xcodeproj is out of date. Run 'xcodegen generate' in App/ and commit the result."
+            git diff --stat -- moko.xcodeproj
+            exit 1
+          fi
+
+      - name: SwiftLint (strict)
+        # lint.sh exits 0 when SwiftLint is missing; installed above, so this is the real pass.
+        run: zsh App/Support/lint.sh
+
+  checks:
+    name: Build and run checks
+    runs-on: xcode-27
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: ./.github/actions/xcode
+
+      - uses: ./.github/actions/runtime
+
+      - name: Build Checks scheme
+        run: |
+          set -o pipefail
+          xcodebuild build -project App/moko.xcodeproj -scheme Checks -configuration Debug \
+            -derivedDataPath build -destination 'platform=macOS,arch=arm64' | xcbeautify || exit 1
+
+      - name: Run check executables
+        run: |
+          products=build/Build/Products/Debug
+          for check in RefreshChecks FormChecks ConnectionChecks PHPProjects ComponentChecks; do
+            echo "::group::$check"
+            "$products/$check"
+            echo "::endgroup::"
+          done
+
+  app:
+    name: App build
+    runs-on: xcode-27
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: ./.github/actions/xcode
+
+      - uses: ./.github/actions/runtime
+
+      - name: Build the app (ad-hoc signed, embeds the runtimes)
+        run: |
+          set -o pipefail
+          xcodebuild build -project App/moko.xcodeproj -scheme moko -configuration Debug \
+            -derivedDataPath build -destination 'platform=macOS,arch=arm64' \
+            CODE_SIGN_IDENTITY=- CODE_SIGN_STYLE=Manual DEVELOPMENT_TEAM= | xcbeautify || exit 1
+          test -x "build/Build/Products/Debug/moko.app/Contents/Resources/Runtime/PostgreSQL/bin/postgres"
+          test -x "build/Build/Products/Debug/moko.app/Contents/Resources/Runtime/PHP/bin/php"
+
+  component-tests:
+    name: Component tests (XCTest)
+    runs-on: xcode-27
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: ./.github/actions/xcode
+
+      - uses: ./.github/actions/runtime
+
+      - name: Test mokoComponentTests (ad-hoc signed)
+        run: |
+          set -o pipefail
+          xcodebuild test -project App/moko.xcodeproj -scheme Interface \
+            -derivedDataPath build -destination 'platform=macOS,arch=arm64' \
+            -resultBundlePath build/ComponentTests.xcresult -only-testing:mokoComponentTests \
+            CODE_SIGN_IDENTITY=- CODE_SIGN_STYLE=Manual DEVELOPMENT_TEAM= | xcbeautify || exit 1
+
+      - name: Upload result bundle
+        if: failure()
+        uses: actions/upload-artifact@v5
+        with:
+          name: ComponentTests.xcresult
+          path: build/ComponentTests.xcresult
+
+  ui-tests:
+    name: UI tests (XCTest, non-blocking)
+    runs-on: xcode-27
+    timeout-minutes: 40
+    # 6 of 13 UI tests (mostly contrast checks) fail on hosted runners with Xcode 26.6 and 27.2 alike.
+    # Kept visible but non-blocking until they pass there. Do not make this a required check yet.
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: ./.github/actions/xcode
+
+      - uses: ./.github/actions/runtime
+
+      - name: Test mokoUITests (ad-hoc signed)
+        run: |
+          set -o pipefail
+          xcodebuild test -project App/moko.xcodeproj -scheme Interface \
+            -derivedDataPath build -destination 'platform=macOS,arch=arm64' \
+            -resultBundlePath build/UITests.xcresult -only-testing:mokoUITests \
+            CODE_SIGN_IDENTITY=- CODE_SIGN_STYLE=Manual DEVELOPMENT_TEAM= | xcbeautify || exit 1
+
+      - name: Upload result bundle
+        if: failure()
+        uses: actions/upload-artifact@v5
+        with:
+          name: UITests.xcresult
+          path: build/UITests.xcresult
