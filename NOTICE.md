@@ -4,6 +4,8 @@ Copyright (c) 2026 Otavio Augusto.
 
 - **Source code** in this repository: GNU General Public License, version 3 or (at your option) any later
   version. See [LICENSE](LICENSE).
+- **Runtime build recipes** in `App/Support/Runtime`: MIT License, see
+  [App/Support/Runtime/LICENSE](App/Support/Runtime/LICENSE).
 - **Third-party software.** This repository contains no third-party binaries. Built applications bundle
   PostgreSQL, PHP, MariaDB and their libraries, each under its own license; see
   [Third Party](App/Resources/Legal/Third%20Party.txt). Whoever distributes a built application must
