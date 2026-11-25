@@ -39,13 +39,39 @@ There is no signed and notarized public download yet.
 | `App/Sources` | Application code: models, servers, C bridges and SwiftUI views |
 | `App/Resources` | Assets, icon and legal texts |
 | `App/Tests` | Check executables and interface tests |
-| `App/Config` | Info.plist, build settings and pinned runtime manifest |
+| `App/Config` | Info.plist, build settings and pinned runtime manifests |
+| `App/Support` | Build scripts, including the runtime bootstrap and recipes |
 | `docs` | User guide and installation |
 
 `App/project.yml` describes the Xcode project ([XcodeGen](https://github.com/yonaskolb/XcodeGen));
-`App/moko.xcodeproj` is generated from it. The app embeds prebuilt PostgreSQL, PHP and MariaDB runtimes
-from `Local/Runtime`, which is not part of this repository, so a fresh clone does not build as it is.
-`App/Config/Runtime.lock.json` pins every runtime component, its version and its upstream source.
+`App/moko.xcodeproj` is generated from it. `App/Config/Runtime.lock.json` pins every runtime component,
+its version and its upstream source.
+
+## Building
+
+Requirements: Apple Silicon, macOS 26 or later, Xcode 26, Python 3.9 or later and XcodeGen 2.46 or later.
+SwiftLint is optional.
+
+The app embeds PostgreSQL, PHP and MariaDB runtimes that are not stored in Git. Fetch them once into
+`Local/Runtime`:
+
+    python3 App/Support/bootstrap-runtime.py
+
+This downloads the development payload pinned in `App/Config/Runtime.payload.json` and verifies its
+SHA-256. To rebuild every runtime from the published upstream sources instead (slow; also needs CMake and
+make):
+
+    python3 App/Support/bootstrap-runtime.py --from-source
+
+Then generate the project and build:
+
+    cd App && xcodegen && xcodebuild -project moko.xcodeproj -scheme moko -configuration Debug build
+
+`python3 App/Support/bootstrap-runtime.py --check` reports what `Local/Runtime` is missing. The targets
+sign with an Apple Development certificate; put your own settings in `Local/Signing/Signing.xcconfig`, or
+pass `CODE_SIGN_IDENTITY=-` to `xcodebuild` for an ad hoc build. The build recipes live in
+`App/Support/Runtime`, and the corresponding source of every bundled binary is attached to the
+[runtime sources release](https://github.com/otavioaugustosw/moko/releases/tag/runtime-sources-2026-10-12).
 
 ## License
 
