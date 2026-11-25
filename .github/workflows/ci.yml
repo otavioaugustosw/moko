@@ -15,18 +15,20 @@ concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
 
-# Deployment target is macOS 26, so every job runs on the macos-26 image (Xcode 26).
+# The project is developed with Xcode 27.2 (moko.icon needs Xcode 27's actool), so every job runs
+# on the Xcode 27 image (macOS 27, arm64) and selects Xcode 27.2 when the image has it.
 jobs:
   lint:
     name: Lint and project drift
-    runs-on: macos-26
+    runs-on: xcode-27
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v5
 
+      - uses: ./.github/actions/xcode
+
       - name: Toolchain
         run: |
-          xcodebuild -version
           brew install swiftlint xcodegen
           swiftlint version
           xcodegen --version
@@ -47,10 +49,12 @@ jobs:
 
   checks:
     name: Build and run checks
-    runs-on: macos-26
+    runs-on: xcode-27
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v5
+
+      - uses: ./.github/actions/xcode
 
       - uses: ./.github/actions/runtime
 
@@ -71,25 +75,21 @@ jobs:
 
   app:
     name: App build (non-blocking)
-    runs-on: macos-26
+    runs-on: xcode-27
     timeout-minutes: 30
-    # Needs Xcode 27 (moko.icon); Xcode 26.x actool raises "attempt to insert nil object" on it.
-    # Non-blocking until the image's Xcode 27 is confirmed.
+    # Xcode 26.x actool raised "attempt to insert nil object" on moko.icon; non-blocking until
+    # this job is confirmed green on the Xcode 27 image.
     continue-on-error: true
     steps:
       - uses: actions/checkout@v5
+
+      - uses: ./.github/actions/xcode
 
       - uses: ./.github/actions/runtime
 
       - name: Build the app (ad-hoc signed, embeds the runtimes)
         run: |
           set -o pipefail
-          # moko.icon is authored with Xcode 27.2; older actool crashes on it.
-          ls -d /Applications/Xcode*.app
-          xcode="$(ls -d /Applications/Xcode_27.2*.app /Applications/Xcode_27*.app 2>/dev/null | head -1)"
-          if [ -z "$xcode" ]; then echo "::error::Xcode 27 is not installed on this runner image"; exit 1; fi
-          export DEVELOPER_DIR="$xcode/Contents/Developer"
-          xcodebuild -version
           xcodebuild build -project App/moko.xcodeproj -scheme moko -configuration Debug \
             -derivedDataPath build -destination 'platform=macOS,arch=arm64' \
             CODE_SIGN_IDENTITY=- CODE_SIGN_STYLE=Manual DEVELOPMENT_TEAM= | xcbeautify || exit 1
@@ -98,10 +98,12 @@ jobs:
 
   component-tests:
     name: Component tests (XCTest)
-    runs-on: macos-26
+    runs-on: xcode-27
     timeout-minutes: 40
     steps:
       - uses: actions/checkout@v5
+
+      - uses: ./.github/actions/xcode
 
       - uses: ./.github/actions/runtime
 
@@ -122,13 +124,15 @@ jobs:
 
   ui-tests:
     name: UI tests (XCTest, non-blocking)
-    runs-on: macos-26
+    runs-on: xcode-27
     timeout-minutes: 40
     # 6 of 13 UI tests (mostly contrast checks) fail on hosted runners, likely display-dependent.
     # Kept visible but non-blocking until they pass there. Do not make this a required check yet.
     continue-on-error: true
     steps:
       - uses: actions/checkout@v5
+
+      - uses: ./.github/actions/xcode
 
       - uses: ./.github/actions/runtime
 
