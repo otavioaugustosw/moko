@@ -1,0 +1,25 @@
+{
+  "formatVersion": 1,
+  "repository": "otavioaugustosw/moko",
+  "payload": {
+    "tag": "dev-runtime-2026-10-12",
+    "asset": "moko-dev-runtime-arm64.tar.xz",
+    "sha256": null,
+    "bytes": null
+  },
+  "sources": {
+    "tag": "runtime-sources-2026-10-12",
+    "assets": [
+      {
+        "name": "moko-base-runtime-sources.zip",
+        "sha256": "3acbd669426923ec5e735b661503506484b15df8a47e6b0a79d7e9367b56cc6c",
+        "bytes": 152914301
+      },
+      {
+        "name": "moko-mariadb-runtime-sources.zip",
+        "sha256": "6c2acaed3401365fd70df4314d52023a24dc5c7f976c8bcab1c2567b38472034",
+        "bytes": 280620498
+      }
+    ]
+  }
+}
