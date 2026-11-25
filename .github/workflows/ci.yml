@@ -74,12 +74,9 @@ jobs:
           done
 
   app:
-    name: App build (non-blocking)
+    name: App build
     runs-on: xcode-27
     timeout-minutes: 30
-    # Xcode 26.x actool raised "attempt to insert nil object" on moko.icon; non-blocking until
-    # this job is confirmed green on the Xcode 27 image.
-    continue-on-error: true
     steps:
       - uses: actions/checkout@v5
 
@@ -126,7 +123,7 @@ jobs:
     name: UI tests (XCTest, non-blocking)
     runs-on: xcode-27
     timeout-minutes: 40
-    # 6 of 13 UI tests (mostly contrast checks) fail on hosted runners, likely display-dependent.
+    # 6 of 13 UI tests (mostly contrast checks) fail on hosted runners with Xcode 26.6 and 27.2 alike.
     # Kept visible but non-blocking until they pass there. Do not make this a required check yet.
     continue-on-error: true
     steps:
