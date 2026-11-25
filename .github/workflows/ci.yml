@@ -72,6 +72,10 @@ jobs:
       - name: Build the app (ad-hoc signed, embeds the runtimes)
         run: |
           set -o pipefail
+          # actool on the image's default Xcode crashed compiling moko.icon; use the newest installed Xcode.
+          ls -d /Applications/Xcode*.app
+          export DEVELOPER_DIR="$(ls -d /Applications/Xcode_26*.app | sort -V | tail -1)/Contents/Developer"
+          xcodebuild -version
           xcodebuild build -project App/moko.xcodeproj -scheme moko -configuration Debug \
             -derivedDataPath build -destination 'platform=macOS,arch=arm64' \
             CODE_SIGN_IDENTITY=- CODE_SIGN_STYLE=Manual DEVELOPMENT_TEAM= | xcbeautify || exit 1
