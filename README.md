@@ -63,6 +63,11 @@ make):
 
     python3 App/Support/bootstrap-runtime.py --from-source
 
+The PostgreSQL runtime is built with `make world-bin`, so every contrib extension (pgcrypto, uuid-ossp,
+pg_trgm, citext, unaccent, hstore and the rest) is available to `CREATE EXTENSION`. After rebuilding,
+`--from-source` regenerates `App/Config/Runtime Inputs.xcfilelist`; publish the result with
+`--package OUT` and upload it under a new `dev-runtime-*` release tag.
+
 Then generate the project and build:
 
     cd App && xcodegen && xcodebuild -project moko.xcodeproj -scheme moko -configuration Debug build

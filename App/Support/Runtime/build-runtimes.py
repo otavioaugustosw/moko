@@ -127,13 +127,22 @@ def postgresql(tree, work, jobs, env, dependencies):
     env = package_environment(work, env, dependencies)
     env['CPPFLAGS'] = '-I' + str(dependencies['openssl@4'] / 'include') + ' -I' + str(dependencies['icu4c@78'] / 'include')
     env['LDFLAGS'] = '-L' + str(dependencies['openssl@4'] / 'lib') + ' -L' + str(dependencies['icu4c@78'] / 'lib')
+    # --with-uuid=e2fs uses the uuid_generate() family that macOS ships in libSystem (no extra
+    # dependency) and enables uuid-ossp; OpenSSL already enables pgcrypto and sslinfo.
     args = [tree / 'configure', '--prefix=/moko/runtime/postgresql', '--without-readline',
             '--without-ldap', '--without-gssapi', '--with-openssl', '--with-icu', '--with-libxml',
-            '--without-perl', '--without-python', '--without-tcl', '--without-llvm']
+            '--with-uuid=e2fs', '--without-perl', '--without-python', '--without-tcl', '--without-llvm']
     run(args, cwd=build, environment=env)
-    run(['make', '-j' + str(jobs)], cwd=build, environment=env)
+    # world-bin is the core plus every contrib module (pgcrypto, uuid-ossp, pg_trgm, citext,
+    # unaccent, hstore, ...) and their tools, without the documentation. Plain `make install`
+    # ships only plpgsql, so CREATE EXTENSION fails for everything else.
+    run(['make', '-j' + str(jobs), 'world-bin'], cwd=build, environment=env)
     stage = work / 'Install/postgresql-stage'
-    run(['make', 'DESTDIR=' + str(stage), 'install'], cwd=build, environment=env)
+    run(['make', 'DESTDIR=' + str(stage), 'install-world-bin'], cwd=build, environment=env)
+    control = stage / 'moko/runtime/postgresql/share/extension'
+    for extension in ['pgcrypto', 'uuid-ossp', 'pg_trgm', 'citext', 'unaccent', 'hstore']:
+        if not (control / (extension + '.control')).is_file():
+            raise RuntimeError('PostgreSQL contrib extension was not built: ' + extension)
     return stage / 'moko/runtime/postgresql', args
 
 
