@@ -60,6 +60,7 @@ enum PostgreSQLRuntimeChecks {
             try testTables(fixture)
             try testRows(fixture)
             try testColumns(fixture)
+            try testExtensions(fixture)
             try PostgreSQLStructureChecks.run(fixture)
             try PostgreSQLTypeChecks.run(fixture)
             try PostgreSQLObjectChecks.run(fixture)
@@ -185,6 +186,33 @@ enum PostgreSQLRuntimeChecks {
         try fixture.require(
             !failed.succeeded && !(try fixture.columns()).contains { $0.name == "broken" },
             "failed structure batch was not rolled back")
+    }
+    /// The runtime ships PostgreSQL's contrib modules (built with `make world-bin`), which projects
+    /// routinely depend on: pgcrypto needs the bundled OpenSSL, uuid-ossp the system UUID library.
+    private static func testExtensions(_ fixture: PostgreSQLCheckFixture) throws {
+        let required = ["pgcrypto", "uuid-ossp", "pg_trgm", "citext", "unaccent", "hstore"]
+        let listed = required.map { "'" + $0 + "'" }.joined(separator: ", ")
+        let available = fixture.query("SELECT name FROM pg_available_extensions WHERE name IN (\(listed))")
+        let rows = available.results.first
+        let names = Set((0..<(rows?.rows.count ?? 0)).compactMap { rows?.text($0, 0) })
+        let missing = required.filter { !names.contains($0) }
+        try fixture.require(
+            available.succeeded && missing.isEmpty,
+            "contrib extensions are not available: " + missing.joined(separator: ", "))
+        let created = fixture.query(
+            required.map { "CREATE EXTENSION \"\($0)\" SCHEMA shadow" }.joined(separator: "; "), multiple: true)
+        try fixture.require(created.succeeded, "contrib extension creation failed: " + created.error)
+        let probe = fixture.query(
+            "SELECT encode(shadow.digest('moko', 'sha256'), 'hex'), shadow.uuid_generate_v4() IS NOT NULL, "
+                + "shadow.similarity('moko', 'moko') = 1, shadow.unaccent('ação'), "
+                + "'MOKO'::shadow.citext OPERATOR(shadow.=) 'moko'::shadow.citext,shadow.crypt('moko', shadow.gen_salt('bf')) <> ''")
+        let row = probe.results.first
+        try fixture.require(
+            probe.succeeded
+                && row?.text(0, 0) == "e7a03d87e87b1a33a06c9d62d24d37f41e218b13f856e66a65abd70de854b1f5"
+                && row?.text(0, 3) == "acao"
+                && [1, 2, 4, 5].allSatisfy { row?.text(0, $0) == "t" },
+            "contrib extension functions failed: " + probe.error)
     }
     private static func testFiles(_ fixture: PostgreSQLCheckFixture) throws {
         let dump = fixture.folder.appendingPathComponent("database.sql")

@@ -5,6 +5,7 @@
     python3 App/Support/bootstrap-runtime.py --from-source    rebuild it from the published source kits
     python3 App/Support/bootstrap-runtime.py --check          report missing or mismatched runtime files
     python3 App/Support/bootstrap-runtime.py --package OUT    archive Local/Runtime and pin it
+    python3 App/Support/bootstrap-runtime.py --write-inputs   list Combined Payload in Runtime Inputs.xcfilelist
 
 The build needs two trees: Local/Runtime/Payload (PostgreSQL, PHP and Connector/C; headers and
 libraries the app links) and Local/Runtime/Combined Payload (the same plus MariaDB Server; what
@@ -205,6 +206,21 @@ def build_from_source(pin, work, jobs, force):
         shutil.move(str(output), str(staging / tree))
     RUNTIME.mkdir(parents=True, exist_ok=True)
     replace_trees(staging, force)
+    # A rebuilt payload can add or drop files (contrib modules, for example); keep Xcode's input list exact.
+    write_inputs()
+
+
+def write_inputs():
+    """List every entry of Combined Payload in Runtime Inputs.xcfilelist, so Xcode reruns the embed phase."""
+    combined = RUNTIME / 'Combined Payload'
+    if not combined.is_dir():
+        raise Failure('Local/Runtime has no "Combined Payload" to list')
+    prefix = '$(SRCROOT)/../Local/Runtime/Combined Payload'
+    entries = [prefix + '/' + path.relative_to(combined).as_posix()
+               for path in combined.rglob('*') if path.name != '.DS_Store']
+    lines = sorted(['$(SRCROOT)/../App/Support/embed-runtimes.py', prefix, *entries])
+    INPUTS.write_text('\n'.join(lines) + '\n')
+    print(f'Listed {len(entries)} payload entries in {INPUTS.relative_to(ROOT)}.')
 
 
 def check():
@@ -277,6 +293,8 @@ def main():
     mode.add_argument('--from-source', action='store_true', help='rebuild every runtime from the source kits')
     mode.add_argument('--check', action='store_true', help='only report what Local/Runtime is missing')
     mode.add_argument('--package', type=Path, metavar='OUT', help='archive Local/Runtime as OUT (.tar.xz) and pin it')
+    mode.add_argument('--write-inputs', action='store_true',
+                      help='regenerate App/Config/Runtime Inputs.xcfilelist from Local/Runtime/Combined Payload')
     parser.add_argument('--force', action='store_true', help='replace an existing Local/Runtime or output file')
     parser.add_argument('--work', type=Path, default=Path(tempfile.gettempdir()) / 'moko-runtime-build',
                         help='build directory for --from-source, without spaces or "@" (default: %(default)s)')
@@ -290,6 +308,9 @@ def main():
             return 1 if problems else 0
         if args.package:
             package(args.package, args.force)
+            return 0
+        if args.write_inputs:
+            write_inputs()
             return 0
         if args.from_source:
             build_from_source(pin, args.work, args.jobs, args.force)

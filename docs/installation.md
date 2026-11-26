@@ -6,7 +6,7 @@ moko requires Apple Silicon and macOS 26 or later.
 2. Follow the welcome screen. Choose the included PostgreSQL or MariaDB server, an existing server, or set up later.
 3. Choose whether to configure PHP now. Select a project folder on the separate PHP setup screen if you accept.
 
-PostgreSQL, MariaDB and PHP are included and work offline. No Homebrew or administrator installer is required. Both SQL engines may run at the same time. Selecting a connection does not control another service.
+PostgreSQL, MariaDB and PHP are included and work offline. PostgreSQL includes its standard contrib extensions, such as pgcrypto, uuid-ossp, pg_trgm, citext and unaccent; enable one with `CREATE EXTENSION`. No Homebrew or administrator installer is required. Both SQL engines may run at the same time. Selecting a connection does not control another service.
 
 Default local ports are PostgreSQL 15432, MariaDB 13306 and PHP 8080. The servers listen on loopback only. An occupied port is reported; moko does not take over an existing process. The PHP server is for local development.
 
